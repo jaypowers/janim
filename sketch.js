@@ -1,4 +1,3 @@
-let equation;
 let setEquation;
 
 function setup() {
@@ -9,37 +8,41 @@ function setup() {
   setEquation = new Equation("S_3 = \\{ e, r, r^2, \\sigma, r \\sigma, r^2 \\sigma\\}", {
     x: width / 2,
     y: height / 2,
-    size: 42,
-    color: "rgba(255, 255, 255, 0.5)",
+    size: 30,
+    color: color(200, 200, 255),
+    shineColor: color(255),
   });
 
+  setEquation.reveal({
+    direction: "left-to-right",
+    duration: 3,
+    ease: "easeInOutSine",
+    letters: true,
+    pop: 0.28
+  });
+
+  animateCharacters();
+}
+
+function animateCharacters() {
+  if (!setEquation.ready) {
+    setTimeout(animateCharacters, 100);
+    return;
+  }
 /*
-  equation = new Equation("e^{i\\pi} + 1 = 0", {
-    x: width / 2 - 140,
-    y: height / 2,
-    size: 42,
-    color: "rgba(255, 255, 255, 0.5)",
-  });
-
-  equation.translate(width / 2, height / 2);
-
-  equation.rotate(TWO_PI, {
-    duration: 4,
-    ease: "easeInOutSine",
-    loop: true
-  });
-
-  equation.scale(1.5, {
-    duration: 2,
-    ease: "easeInOutSine",
-    loop: true,
-    yoyo: true
-  });
+  setEquation.characters[0].scale(1.5, { duration: 0.8, yoyo: true, loop: true });
+  setEquation.characters[4].translate(0, -18, { duration: 0.8, yoyo: true, loop: true });
+  setEquation.characters[8].rotate(PI / 8, { duration: 0.8, yoyo: true, loop: true });
   */
 }
 
 function draw() {
   background(5, 16, 32);
+
+  fill(255, 180);
+  noStroke();
+  textSize(18);
+  text("Reveal directions: left-to-right, right-to-left, top-to-bottom, bottom-to-top", width / 2, 90);
 
   setEquation.update();
   setEquation.draw();

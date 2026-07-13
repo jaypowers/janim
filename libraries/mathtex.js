@@ -3,7 +3,7 @@ async function latexImage(latex, options = {}) {
 
   const settings = {
     size: options.size || 36,
-    color: options.color || "black",
+    color: cssColor(options.color || "black"),
     display: options.display !== false
   };
 
@@ -74,4 +74,24 @@ function svgToP5Image(svgText) {
       reject(error);
     });
   });
+}
+
+function cssColor(value) {
+  if (typeof value === "string") return value;
+
+  if (Array.isArray(value)) {
+    return "rgb(" + (value[0] || 0) + "," + (value[1] || 0) + "," + (value[2] || 0) + ")";
+  }
+
+  if (typeof value === "object" && value) {
+    if (value.r !== undefined || value.g !== undefined || value.b !== undefined) {
+      return "rgb(" + (value.r || 0) + "," + (value.g || 0) + "," + (value.b || 0) + ")";
+    }
+
+    if (typeof red === "function" && typeof green === "function" && typeof blue === "function") {
+      return "rgb(" + red(value) + "," + green(value) + "," + blue(value) + ")";
+    }
+  }
+
+  return "black";
 }
