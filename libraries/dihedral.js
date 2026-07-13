@@ -8,6 +8,18 @@ class DihedralGroup {
     this.scaleAmount = options.scale || 1;
     this.flipAxis = options.flipAxis || 0;
     this.flipAmount = options.flip ? 1 : 0;
+    this.rotationName = options.rotationName || "r";
+    this.reflectionName = options.reflectionName || "sigma";
+    this.rotationStep = TWO_PI / this.n;
+    this.presentation = {
+      rotation: this.rotationName,
+      reflection: this.reflectionName,
+      relations: [
+        this.rotationName + "^" + this.n + " = e",
+        this.reflectionName + "^2 = e",
+        this.reflectionName + " " + this.rotationName + " " + this.reflectionName + " = " + this.rotationName + "^-1"
+      ]
+    };
     this.fillColor = colorParts(options.fillColor || [45, 95, 150]);
     this.strokeColor = colorParts(options.strokeColor || [180, 220, 255]);
     this.labelColor = colorParts(options.labelColor || [255, 255, 255]);
@@ -16,6 +28,7 @@ class DihedralGroup {
     this.animations = [];
     this.steps = [];
     this.running = false;
+    this.loopSteps = false;
     this.stepIndex = 0;
   }
 
@@ -33,6 +46,11 @@ class DihedralGroup {
   }
 
   rotate(angle, options = {}) {
+    if (typeof angle === "object" || angle === undefined) {
+      options = angle || {};
+      angle = this.rotation + this.rotationStep;
+    }
+
     if (options.duration) {
       this.animate("rotation", angle, options);
     } else {
@@ -53,17 +71,27 @@ class DihedralGroup {
   }
 
   flip(axisAngle, options = {}) {
-    this.flipAxis = axisAngle || 0;
+    const nextAxis = this.axisAngle(axisAngle);
+
+    if (this.flipAmount > 0.5 && Math.abs(nextAxis - this.flipAxis) > 0.0001) {
+      this.rotation += 2 * (nextAxis - this.flipAxis);
+    }
+
+    this.flipAxis = nextAxis;
 
     if (options.duration) {
-      const target = this.flipAmount < 0.5 ? 1 : 0;
+      const target = options.to === undefined ? this.nextFlipAmount() : options.to;
       this.animate("flipAmount", target, options);
     } else {
       this.stopAnimation("flipAmount");
-      this.flipAmount = this.flipAmount < 0.5 ? 1 : 0;
+      this.flipAmount = options.to === undefined ? this.nextFlipAmount() : options.to;
     }
 
     return this;
+  }
+
+  nextFlipAmount() {
+    return this.flipAmount < 0.5 ? 1 : 0;
   }
 
   pushTranslate(x, y, options = {}) {
@@ -77,6 +105,11 @@ class DihedralGroup {
   }
 
   pushRotate(angle, options = {}) {
+    if (typeof angle === "object" || angle === undefined) {
+      options = angle || {};
+      angle = null;
+    }
+
     this.steps.push({
       type: "rotate",
       angle,
@@ -103,8 +136,55 @@ class DihedralGroup {
     return this;
   }
 
-  run() {
+  pushAllRotations(options = {}) {
+    for (let i = 0; i < this.n; i += 1) {
+      this.pushRotate(options);
+    }
+    return this;
+  }
+
+  pushAllFlips(options = {}) {
+    const axes = this.symmetryAxes();
+
+    for (let i = 0; i < axes.length; i += 1) {
+      this.pushFlip(axes[i], options);
+      this.pushFlip(axes[i], Object.assign({}, options, { to: 0 }));
+    }
+
+    return this;
+  }
+
+  relationText() {
+    return "D_" + this.n + " = <" + this.rotationName + ", " + this.reflectionName + " | " + this.presentation.relations.join(", ") + ">";
+  }
+
+  axisAngle(axis) {
+    if (typeof axis === "number") return axis;
+    if (axis === "x") return 0;
+    if (axis === "horizontal") return 0;
+    if (axis === "y") return HALF_PI;
+    if (axis === "vertical") return HALF_PI;
+    if (axis === "vertex") return -HALF_PI;
+    return this.defaultReflectionAxis();
+  }
+
+  defaultReflectionAxis() {
+    return -HALF_PI;
+  }
+
+  symmetryAxes() {
+    const axes = [];
+
+    for (let i = 0; i < this.n; i += 1) {
+      axes.push(this.rotation + i * Math.PI / this.n);
+    }
+
+    return axes;
+  }
+
+  run(options = {}) {
     this.running = true;
+    this.loopSteps = Boolean(options.loop || options.repeat);
     this.stepIndex = 0;
     this.animations = [];
     this.startNextStep();
@@ -182,7 +262,9 @@ class DihedralGroup {
   }
 
   flipScale() {
-    return Math.cos(Math.PI * constrain(this.flipAmount, 0, 1));
+    const amount = Math.cos(Math.PI * constrain(this.flipAmount, 0, 1));
+    if (Math.abs(amount) < 0.001) return 0.001;
+    return amount;
   }
 
   transformedPoint(angle, radius) {
@@ -202,6 +284,15 @@ class DihedralGroup {
 
   startNextStep() {
     if (this.stepIndex >= this.steps.length) {
+      if (this.loopSteps && this.steps.length > 0) {
+        this.stepIndex = 0;
+      } else {
+        this.running = false;
+        return this;
+      }
+    }
+
+    if (this.stepIndex >= this.steps.length) {
       this.running = false;
       return this;
     }
@@ -210,7 +301,8 @@ class DihedralGroup {
     this.stepIndex += 1;
 
     if (step.type === "translate") this.translate(step.x, step.y, step.options);
-    if (step.type === "rotate") this.rotate(step.angle, step.options);
+    if (step.type === "rotate" && step.angle === null) this.rotate(step.options);
+    if (step.type === "rotate" && step.angle !== null) this.rotate(step.angle, step.options);
     if (step.type === "scale") this.scale(step.amount, step.options);
     if (step.type === "flip") this.flip(step.axisAngle, step.options);
 
