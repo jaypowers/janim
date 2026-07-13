@@ -212,14 +212,6 @@ class Equation {
       return { x: left + w * (1 - amount), y: top, w: w * amount, h };
     }
 
-    if (direction === "top-to-bottom") {
-      return { x: left, y: top, w, h: h * amount };
-    }
-
-    if (direction === "bottom-to-top") {
-      return { x: left, y: top + h * (1 - amount), w, h: h * amount };
-    }
-
     return { x: left, y: top, w: w * amount, h };
   }
 
@@ -234,11 +226,7 @@ class Equation {
     noStroke();
     fill(this.shineColor.r, this.shineColor.g, this.shineColor.b, alpha);
 
-    if (direction === "top-to-bottom") {
-      rect(clip.x, clip.y + clip.h - 6, clip.w, 12);
-    } else if (direction === "bottom-to-top") {
-      rect(clip.x, clip.y - 6, clip.w, 12);
-    } else if (direction === "right-to-left") {
+    if (direction === "right-to-left") {
       rect(clip.x - 6, clip.y, 12, clip.h);
     } else {
       rect(clip.x + clip.w - 6, clip.y, 12, clip.h);
@@ -295,8 +283,6 @@ function normalizeRevealDirection(direction) {
   const key = String(direction || "left-to-right").toLowerCase();
   if (key === "left" || key === "left-to-right" || key === "ltr") return "left-to-right";
   if (key === "right" || key === "right-to-left" || key === "rtl") return "right-to-left";
-  if (key === "top" || key === "top-to-bottom" || key === "ttb") return "top-to-bottom";
-  if (key === "bottom" || key === "bottom-to-top" || key === "btt") return "bottom-to-top";
   return "left-to-right";
 }
 

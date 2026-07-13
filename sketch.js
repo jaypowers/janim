@@ -9,7 +9,7 @@ function setup() {
     x: width / 2,
     y: height / 2,
     size: 30,
-    color: color(200, 200, 255),
+    color: color(200, 200, 255, 255),
     shineColor: color(255),
   });
 
@@ -21,19 +21,15 @@ function setup() {
     pop: 0.28
   });
 
-  animateCharacters();
-}
+  setEquation.translate(width/2, height/4, {
+    duration: 3,
+    ease: "easeInOutSine"
+  });
 
-function animateCharacters() {
-  if (!setEquation.ready) {
-    setTimeout(animateCharacters, 100);
-    return;
-  }
-/*
-  setEquation.characters[0].scale(1.5, { duration: 0.8, yoyo: true, loop: true });
-  setEquation.characters[4].translate(0, -18, { duration: 0.8, yoyo: true, loop: true });
-  setEquation.characters[8].rotate(PI / 8, { duration: 0.8, yoyo: true, loop: true });
-  */
+  setEquation.rotate(2*PI, {
+    duration: 3,
+    ease: "easeInOutSine"
+  });
 }
 
 function draw() {
@@ -42,7 +38,7 @@ function draw() {
   fill(255, 180);
   noStroke();
   textSize(18);
-  text("Reveal directions: left-to-right, right-to-left, top-to-bottom, bottom-to-top", width / 2, 90);
+  text("Reveal directions: left-to-right or right-to-left", width / 2, 90);
 
   setEquation.update();
   setEquation.draw();
