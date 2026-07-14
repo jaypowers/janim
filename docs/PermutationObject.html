@@ -374,6 +374,123 @@ means `1 -> 2`, `2 -> 3`, and `3 -> 1`.</div>
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    [235,245,255]
+                
+                </td>
+            
+
+            <td class="description last">Main text and card-label color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accentColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    [255,220,110]
+                
+                </td>
+            
+
+            <td class="description last">Matrix, outline, and highlight color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cardColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    [18,45,76]
+                
+                </td>
+            
+
+            <td class="description last">Fill color for moving element cards.</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -418,7 +535,7 @@ means `1 -> 2`, `2 -> 3`, and `3 -> 1`.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line25">line 25</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -541,7 +658,7 @@ p.run({ loop: true });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line154">line 154</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line157">line 157</a>
     </li></ul></dd>
     
 
@@ -674,7 +791,194 @@ path becomes circular.
 
             
 
-            <td class="description last">Animation options.</td>
+            <td class="description last">Animation options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    2.6
+                
+                </td>
+            
+
+            <td class="description last">Animation duration in seconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Seconds to wait before animation starts.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ease</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "easeInOutSine"
+                
+                </td>
+            
+
+            <td class="description last">Easing name or easing function.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Movement path. Defaults to `"orbit"` when exactly two elements move.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -715,7 +1019,7 @@ path becomes circular.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line289">line 289</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line300">line 300</a>
     </li></ul></dd>
     
 
@@ -876,7 +1180,194 @@ path becomes circular.
 
             
 
-            <td class="description last">Animation options.</td>
+            <td class="description last">Animation options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    2.6
+                
+                </td>
+            
+
+            <td class="description last">Animation duration in seconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Seconds to wait before animation starts.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ease</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "easeInOutSine"
+                
+                </td>
+            
+
+            <td class="description last">Easing name or easing function.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Movement path. Defaults to `"orbit"` when exactly two elements move, otherwise `"flat"`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -917,7 +1408,7 @@ path becomes circular.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line328">line 328</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line347">line 347</a>
     </li></ul></dd>
     
 
@@ -1097,7 +1588,118 @@ path becomes circular.
                 </td>
             
 
-            <td class="description last">Animation options.</td>
+            <td class="description last">Animation options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Seconds to wait before the pause starts.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ease</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "easeInOutSine"
+                
+                </td>
+            
+
+            <td class="description last">Easing used by the held progress value.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -1138,7 +1740,7 @@ path becomes circular.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line340">line 340</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line361">line 361</a>
     </li></ul></dd>
     
 
@@ -1352,7 +1954,7 @@ Any other string is treated as text attached to this object.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line86">line 86</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line89">line 89</a>
     </li></ul></dd>
     
 
@@ -1535,7 +2137,194 @@ p.push("swap", 1, 2);</code></pre>
                 </td>
             
 
-            <td class="description last">Animation options.</td>
+            <td class="description last">Animation options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    2.6
+                
+                </td>
+            
+
+            <td class="description last">Animation duration in seconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Seconds to wait before animation starts.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ease</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "easeInOutSine"
+                
+                </td>
+            
+
+            <td class="description last">Easing name (`"linear"` or default sine) or easing function.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Movement path: `"flat"` for straight interpolation or `"orbit"` for arcing swaps.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -1576,7 +2365,7 @@ p.push("swap", 1, 2);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line273">line 273</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line280">line 280</a>
     </li></ul></dd>
     
 
@@ -1816,7 +2605,7 @@ p.push("swap", 1, 2);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line108">line 108</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line111">line 111</a>
     </li></ul></dd>
     
 
@@ -2008,7 +2797,196 @@ p.push("swap", 1, 2);</code></pre>
 
             
 
-            <td class="description last">Animation options.</td>
+            <td class="description last">Animation options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    2.6
+                
+                </td>
+            
+
+            <td class="description last">Animation duration in seconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Seconds to wait before animation starts.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ease</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "easeInOutSine"
+                
+                </td>
+            
+
+            <td class="description last">Easing name or easing function.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "orbit"
+                
+                </td>
+            
+
+            <td class="description last">Movement path for the swapped cards.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -2049,7 +3027,7 @@ p.push("swap", 1, 2);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line305">line 305</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line320">line 320</a>
     </li></ul></dd>
     
 
@@ -2225,7 +3203,7 @@ p.push("swap", 1, 2);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="permutation.js.html">permutation.js</a>, <a href="permutation.js.html#line123">line 123</a>
+        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line126">line 126</a>
     </li></ul></dd>
     
 
@@ -2293,13 +3271,13 @@ p.push("swap", 1, 2);</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li><li><a href="SceneQueueObject.html">SceneQueueObject</a></li><li><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li><li><a href="global.html#SceneQueue">SceneQueue</a></li><li><a href="global.html#SymmetricGroup">SymmetricGroup</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DihedralGroupObject.html">DihedralGroupObject</a></li><li><a href="DihedralTableObject.html">DihedralTableObject</a></li><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li><li><a href="SceneQueueObject.html">SceneQueueObject</a></li><li><a href="SquareVertexPermutationObject.html">SquareVertexPermutationObject</a></li><li><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DihedralGroup">DihedralGroup</a></li><li><a href="global.html#DihedralTable">DihedralTable</a></li><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li><li><a href="global.html#SceneQueue">SceneQueue</a></li><li><a href="global.html#SquareVertexPermutation">SquareVertexPermutation</a></li><li><a href="global.html#SymmetricGroup">SymmetricGroup</a></li><li><a href="global.html#latexImage">latexImage</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:38:11 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:46:01 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

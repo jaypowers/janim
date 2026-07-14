@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: dihedral.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: dihedral.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Animated regular polygon model for the dihedral group `D_n`.
  *
  * The object draws an `n`-gon and animates rotations, flips, scaling, and
@@ -176,7 +204,7 @@ class DihedralGroupObject {
   flip(axisAngle, options = {}) {
     const nextAxis = this.axisAngle(axisAngle);
 
-    if (this.flipAmount > 0.5 && Math.abs(nextAxis - this.flipAxis) > 0.0001) {
+    if (this.flipAmount > 0.5 &amp;&amp; Math.abs(nextAxis - this.flipAxis) > 0.0001) {
       this.rotation += 2 * (nextAxis - this.flipAxis);
     }
 
@@ -194,7 +222,7 @@ class DihedralGroupObject {
   }
 
   nextFlipAmount() {
-    return this.flipAmount < 0.5 ? 1 : 0;
+    return this.flipAmount &lt; 0.5 ? 1 : 0;
   }
 
   /**
@@ -213,14 +241,14 @@ class DihedralGroupObject {
   }
 
   stepFrom(args) {
-    if (typeof args[0] === "object" && args[0]) return args[0];
+    if (typeof args[0] === "object" &amp;&amp; args[0]) return args[0];
 
     const type = args[0];
     const value = args[1];
-    const extraOptions = typeof value === "object" && value ? value : args[2] || {};
+    const extraOptions = typeof value === "object" &amp;&amp; value ? value : args[2] || {};
     const options = Object.assign({ duration: 2, ease: "easeInOutSine" }, extraOptions);
 
-    const hasOptionsAsSecondArgument = typeof value === "object" && value;
+    const hasOptionsAsSecondArgument = typeof value === "object" &amp;&amp; value;
     const stepValue = hasOptionsAsSecondArgument ? undefined : value;
 
     if (type === "rotate") return { type: "rotate", angle: stepValue === undefined ? null : stepValue, options };
@@ -337,7 +365,7 @@ class DihedralGroupObject {
   }
 
   relationText() {
-    return "D_" + this.n + " = <" + this.rotationName + ", " + this.reflectionName + " | " + this.presentation.relations.join(", ") + ">";
+    return "D_" + this.n + " = &lt;" + this.rotationName + ", " + this.reflectionName + " | " + this.presentation.relations.join(", ") + ">";
   }
 
   axisAngle(axis) {
@@ -357,7 +385,7 @@ class DihedralGroupObject {
   symmetryAxes() {
     const axes = [];
 
-    for (let i = 0; i < this.n; i += 1) {
+    for (let i = 0; i &lt; this.n; i += 1) {
       axes.push(this.rotation + i * Math.PI / this.n);
     }
 
@@ -385,7 +413,7 @@ class DihedralGroupObject {
     const seconds = dt || deltaTime / 1000 || 1 / 60;
 
     this.animations = this.animations.filter(updateAnimationFor(this, seconds));
-    if (this.running && this.animations.length === 0) this.startNextStep();
+    if (this.running &amp;&amp; this.animations.length === 0) this.startNextStep();
     return this;
   }
 
@@ -414,7 +442,7 @@ class DihedralGroupObject {
     strokeWeight(3);
 
     beginShape();
-    for (let i = 0; i < this.n; i += 1) {
+    for (let i = 0; i &lt; this.n; i += 1) {
       const angle = TWO_PI * i / this.n;
       vertex(Math.cos(angle) * this.radius, Math.sin(angle) * this.radius);
     }
@@ -422,7 +450,7 @@ class DihedralGroupObject {
 
     stroke(this.strokeColor.r, this.strokeColor.g, this.strokeColor.b, 120);
     strokeWeight(1.5);
-    for (let i = 0; i < this.n; i += 1) {
+    for (let i = 0; i &lt; this.n; i += 1) {
       const angle = TWO_PI * i / this.n;
       line(0, 0, Math.cos(angle) * this.radius, Math.sin(angle) * this.radius);
     }
@@ -434,7 +462,7 @@ class DihedralGroupObject {
     textSize(18);
     textAlign(CENTER, CENTER);
 
-    for (let i = 0; i < this.n; i += 1) {
+    for (let i = 0; i &lt; this.n; i += 1) {
       const point = this.transformedPoint(TWO_PI * i / this.n, this.radius + 24);
       text(String(i + 1), point.x, point.y);
     }
@@ -484,7 +512,7 @@ class DihedralGroupObject {
 
   flipScale() {
     const amount = Math.cos(Math.PI * constrain(this.flipAmount, 0, 1));
-    if (Math.abs(amount) < 0.001) return 0.001;
+    if (Math.abs(amount) &lt; 0.001) return 0.001;
     return amount;
   }
 
@@ -505,7 +533,7 @@ class DihedralGroupObject {
 
   startNextStep() {
     if (this.stepIndex >= this.steps.length) {
-      if (this.loopSteps && this.steps.length > 0) {
+      if (this.loopSteps &amp;&amp; this.steps.length > 0) {
         this.stepIndex = 0;
       } else {
         this.running = false;
@@ -522,8 +550,8 @@ class DihedralGroupObject {
     this.stepIndex += 1;
 
     if (step.type === "translate") this.translate(step.x, step.y, step.options);
-    if (step.type === "rotate" && step.angle === null) this.rotate(step.options);
-    if (step.type === "rotate" && step.angle !== null) this.rotate(step.angle, step.options);
+    if (step.type === "rotate" &amp;&amp; step.angle === null) this.rotate(step.options);
+    if (step.type === "rotate" &amp;&amp; step.angle !== null) this.rotate(step.angle, step.options);
     if (step.type === "scale") this.scale(step.amount, step.options);
     if (step.type === "flip") this.flip(step.axisAngle, step.options);
 
@@ -552,7 +580,7 @@ class DihedralGroupObject {
  * @returns {DihedralGroupObject}
  */
 function DihedralGroup(n, ...args) {
-  if (typeof n === "object" && n) {
+  if (typeof n === "object" &amp;&amp; n) {
     args = [n];
     n = n.n || n.sides || 3;
   }
@@ -570,7 +598,7 @@ function groupOptionsFrom(args) {
     return options;
   }
 
-  for (let i = 0; i < args.length; i += 1) {
+  for (let i = 0; i &lt; args.length; i += 1) {
     Object.assign(options, args[i] || {});
   }
 
@@ -598,7 +626,7 @@ function updateAnimationFor(target, seconds) {
     const raw = constrain((animation.elapsed - animation.delay) / animation.duration, 0, 1);
     target[animation.property] = lerp(animation.from, animation.to, animation.ease(raw));
 
-    if (raw < 1) return true;
+    if (raw &lt; 1) return true;
     if (!animation.loop) return false;
 
     animation.elapsed = 0;
@@ -651,7 +679,7 @@ function colorParts(value) {
     };
   }
 
-  if (typeof value === "object" && value) {
+  if (typeof value === "object" &amp;&amp; value) {
     if (value.r !== undefined || value.g !== undefined || value.b !== undefined) {
       return {
         r: value.r === undefined ? 255 : value.r,
@@ -660,10 +688,33 @@ function colorParts(value) {
       };
     }
 
-    if (typeof red === "function" && typeof green === "function" && typeof blue === "function") {
+    if (typeof red === "function" &amp;&amp; typeof green === "function" &amp;&amp; typeof blue === "function") {
       return { r: red(value), g: green(value), b: blue(value) };
     }
   }
 
   return { r: 255, g: 255, b: 255 };
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DihedralGroupObject.html">DihedralGroupObject</a></li><li><a href="DihedralTableObject.html">DihedralTableObject</a></li><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li><li><a href="SceneQueueObject.html">SceneQueueObject</a></li><li><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DihedralGroup">DihedralGroup</a></li><li><a href="global.html#DihedralTable">DihedralTable</a></li><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li><li><a href="global.html#SceneQueue">SceneQueue</a></li><li><a href="global.html#SymmetricGroup">SymmetricGroup</a></li><li><a href="global.html#latexImage">latexImage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:45:09 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

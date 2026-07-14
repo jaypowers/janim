@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: libraries/dihedral-table.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: libraries/dihedral-table.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Animated multiplication table for a dihedral group `D_n`.
  *
  * The table lays out rotations first, then reflections, and renders the cell
@@ -81,7 +109,7 @@ class DihedralTableObject {
   makeElements() {
     const elements = [];
 
-    for (let i = 0; i < this.n; i += 1) {
+    for (let i = 0; i &lt; this.n; i += 1) {
       elements.push({
         rotation: i,
         reflection: false,
@@ -90,7 +118,7 @@ class DihedralTableObject {
       });
     }
 
-    for (let i = 0; i < this.n; i += 1) {
+    for (let i = 0; i &lt; this.n; i += 1) {
       elements.push({
         rotation: i,
         reflection: true,
@@ -250,7 +278,7 @@ class DihedralTableObject {
   push(...args) {
     const type = args[0];
     const options = args[args.length - 1];
-    const hasOptions = typeof options === "object" && options && !Array.isArray(options);
+    const hasOptions = typeof options === "object" &amp;&amp; options &amp;&amp; !Array.isArray(options);
     const stepOptions = Object.assign({}, this.defaultStepOptions(type), hasOptions ? options : {});
 
     if (type === "revealGrid") this.steps.push({ type: "revealGrid", options: stepOptions });
@@ -304,7 +332,7 @@ class DihedralTableObject {
     const seconds = dt || deltaTime / 1000 || 1 / 60;
 
     this.animations = this.animations.filter(updateTableAnimationFor(this, seconds));
-    if (this.running && this.animations.length === 0) this.startNextStep();
+    if (this.running &amp;&amp; this.animations.length === 0) this.startNextStep();
     return this;
   }
 
@@ -350,8 +378,8 @@ class DihedralTableObject {
     fill(this.backgroundColor.r, this.backgroundColor.g, this.backgroundColor.b, 230);
     rect(this.x, this.y, this.totalWidth(), this.totalWidth());
 
-    for (let row = 0; row < size; row += 1) {
-      for (let col = 0; col < size; col += 1) {
+    for (let row = 0; row &lt; size; row += 1) {
+      for (let col = 0; col &lt; size; col += 1) {
         if (row === 0 || col === 0) {
           fill(this.headerColor.r, this.headerColor.g, this.headerColor.b, 210);
         } else {
@@ -389,18 +417,18 @@ class DihedralTableObject {
     stroke(this.gridColor.r, this.gridColor.g, this.gridColor.b, 180);
     strokeWeight(1.5);
 
-    for (let i = 0; i <= size; i += 1) {
+    for (let i = 0; i &lt;= size; i += 1) {
       this.drawAnimatedLine(i, visible, this.x, this.y + i * this.cellSize, this.x + total, this.y + i * this.cellSize);
     }
 
-    for (let i = 0; i <= size; i += 1) {
+    for (let i = 0; i &lt;= size; i += 1) {
       this.drawAnimatedLine(size + 1 + i, visible, this.x + i * this.cellSize, this.y, this.x + i * this.cellSize, this.y + total);
     }
   }
 
   drawAnimatedLine(index, visible, x1, y1, x2, y2) {
     const amount = constrain(visible - index, 0, 1);
-    if (amount <= 0) return;
+    if (amount &lt;= 0) return;
 
     line(x1, y1, lerp(x1, x2, amount), lerp(y1, y2, amount));
   }
@@ -410,8 +438,8 @@ class DihedralTableObject {
 
     textAlign(CENTER, CENTER);
 
-    for (let row = 0; row < size; row += 1) {
-      for (let col = 0; col < size; col += 1) {
+    for (let row = 0; row &lt; size; row += 1) {
+      for (let col = 0; col &lt; size; col += 1) {
         this.drawLabelAt(row, col);
       }
     }
@@ -423,7 +451,7 @@ class DihedralTableObject {
 
     const order = row * this.tableSize() + col;
     const visible = constrain(this.elementProgress * this.tableSize() * this.tableSize() - order, 0, 1);
-    if (visible <= 0) return;
+    if (visible &lt;= 0) return;
 
     const popAmount = Math.sin(Math.PI * visible) * 0.22;
     const scaleAmount = 0.86 + visible * 0.14 + popAmount;
@@ -464,7 +492,7 @@ class DihedralTableObject {
   }
 
   entryAt(row, col) {
-    if (row === 0 && col === 0) return { label: "compose", latex: this.operationLatex };
+    if (row === 0 &amp;&amp; col === 0) return { label: "compose", latex: this.operationLatex };
     if (row === 0) return this.elements[col - 1];
     if (col === 0) return this.elements[row - 1];
     return this.multiply(this.elements[row - 1], this.elements[col - 1]);
@@ -475,7 +503,7 @@ class DihedralTableObject {
     const maxWidth = this.cellSize * 0.82;
 
     textSize(fontSize);
-    while (textWidth(label) > maxWidth && fontSize > 8) {
+    while (textWidth(label) > maxWidth &amp;&amp; fontSize > 8) {
       fontSize -= 1;
       textSize(fontSize);
     }
@@ -492,15 +520,15 @@ class DihedralTableObject {
   }
 
   findElement(label) {
-    for (let i = 0; i < this.elements.length; i += 1) {
+    for (let i = 0; i &lt; this.elements.length; i += 1) {
       if (this.elements[i].label === label) return this.elements[i];
     }
     return null;
   }
 
   indexOfElement(element) {
-    for (let i = 0; i < this.elements.length; i += 1) {
-      if (this.elements[i].rotation === element.rotation && this.elements[i].reflection === element.reflection) return i;
+    for (let i = 0; i &lt; this.elements.length; i += 1) {
+      if (this.elements[i].rotation === element.rotation &amp;&amp; this.elements[i].reflection === element.reflection) return i;
     }
     return -1;
   }
@@ -508,12 +536,12 @@ class DihedralTableObject {
   loadLatexImages() {
     const latexValues = [this.operationLatex];
 
-    for (let i = 0; i < this.elements.length; i += 1) {
+    for (let i = 0; i &lt; this.elements.length; i += 1) {
       latexValues.push(this.elements[i].latex);
     }
 
-    for (let row = 1; row < this.tableSize(); row += 1) {
-      for (let col = 1; col < this.tableSize(); col += 1) {
+    for (let row = 1; row &lt; this.tableSize(); row += 1) {
+      for (let col = 1; col &lt; this.tableSize(); col += 1) {
         latexValues.push(this.multiply(this.elements[row - 1], this.elements[col - 1]).latex);
       }
     }
@@ -535,7 +563,7 @@ class DihedralTableObject {
   loadCellLatex(latexValues) {
     const unique = {};
 
-    for (let i = 0; i < latexValues.length; i += 1) {
+    for (let i = 0; i &lt; latexValues.length; i += 1) {
       unique[latexValues[i]] = true;
     }
 
@@ -588,7 +616,7 @@ class DihedralTableObject {
  * @returns {DihedralTableObject}
  */
 function DihedralTable(n, ...args) {
-  if (typeof n === "object" && n) {
+  if (typeof n === "object" &amp;&amp; n) {
     args = [n];
     n = n.n || n.sides || 3;
   }
@@ -604,7 +632,7 @@ function tableOptionsFrom(n, args) {
     options.y = args[1] || 0;
     Object.assign(options, args[2] || {});
   } else {
-    for (let i = 0; i < args.length; i += 1) {
+    for (let i = 0; i &lt; args.length; i += 1) {
       Object.assign(options, args[i] || {});
     }
   }
@@ -637,7 +665,7 @@ function updateTableAnimationFor(target, seconds) {
     const raw = constrain((animation.elapsed - animation.delay) / animation.duration, 0, 1);
     target[animation.property] = lerp(animation.from, animation.to, animation.ease(raw));
 
-    return raw < 1;
+    return raw &lt; 1;
   };
 }
 
@@ -676,7 +704,7 @@ function tableColorParts(value) {
     };
   }
 
-  if (typeof value === "object" && value) {
+  if (typeof value === "object" &amp;&amp; value) {
     if (value.r !== undefined || value.g !== undefined || value.b !== undefined) {
       return {
         r: value.r === undefined ? 255 : value.r,
@@ -685,10 +713,33 @@ function tableColorParts(value) {
       };
     }
 
-    if (typeof red === "function" && typeof green === "function" && typeof blue === "function") {
+    if (typeof red === "function" &amp;&amp; typeof green === "function" &amp;&amp; typeof blue === "function") {
       return { r: red(value), g: green(value), b: blue(value) };
     }
   }
 
   return { r: 255, g: 255, b: 255 };
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DihedralGroupObject.html">DihedralGroupObject</a></li><li><a href="DihedralTableObject.html">DihedralTableObject</a></li><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li><li><a href="SceneQueueObject.html">SceneQueueObject</a></li><li><a href="SquareVertexPermutationObject.html">SquareVertexPermutationObject</a></li><li><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DihedralGroup">DihedralGroup</a></li><li><a href="global.html#DihedralTable">DihedralTable</a></li><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li><li><a href="global.html#SceneQueue">SceneQueue</a></li><li><a href="global.html#SquareVertexPermutation">SquareVertexPermutation</a></li><li><a href="global.html#SymmetricGroup">SymmetricGroup</a></li><li><a href="global.html#latexImage">latexImage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:46:01 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

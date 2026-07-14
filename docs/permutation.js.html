@@ -59,6 +59,9 @@ class PermutationObject {
    * @param {number} [options.spacing=96] - Horizontal spacing between slots.
    * @param {number} [options.orbitHeight=76] - Height of circular swap arcs.
    * @param {string} [options.title="Set and ordered tuple"] - Heading drawn above the object.
+   * @param {*} [options.color=[235,245,255]] - Main text and card-label color.
+   * @param {*} [options.accentColor=[255,220,110]] - Matrix, outline, and highlight color.
+   * @param {*} [options.cardColor=[18,45,76]] - Fill color for moving element cards.
    */
   constructor(elements, options = {}) {
     this.elements = elements.slice();
@@ -296,6 +299,10 @@ class PermutationObject {
    *
    * @param {number} [amount=1] - Number of cyclic shifts.
    * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration=2.6] - Animation duration in seconds.
+   * @param {number} [options.delay=0] - Seconds to wait before animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name (`"linear"` or default sine) or easing function.
+   * @param {string} [options.path] - Movement path: `"flat"` for straight interpolation or `"orbit"` for arcing swaps.
    * @returns {PermutationObject} This object.
    */
   rotate(amount = 1, options = {}) {
@@ -312,6 +319,10 @@ class PermutationObject {
    * path becomes circular.
    *
    * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration=2.6] - Animation duration in seconds.
+   * @param {number} [options.delay=0] - Seconds to wait before animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function.
+   * @param {string} [options.path] - Movement path. Defaults to `"orbit"` when exactly two elements move.
    * @returns {PermutationObject} This object.
    */
   flip(options = {}) {
@@ -325,6 +336,10 @@ class PermutationObject {
    * @param {number} a - First tuple position, starting at 1.
    * @param {number} b - Second tuple position, starting at 1.
    * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration=2.6] - Animation duration in seconds.
+   * @param {number} [options.delay=0] - Seconds to wait before animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function.
+   * @param {string} [options.path="orbit"] - Movement path for the swapped cards.
    * @returns {PermutationObject} This object.
    *
    * @example
@@ -348,6 +363,10 @@ class PermutationObject {
    *
    * @param {Array&lt;number|string>} nextOrder - The next tuple order.
    * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration=2.6] - Animation duration in seconds.
+   * @param {number} [options.delay=0] - Seconds to wait before animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function.
+   * @param {string} [options.path] - Movement path. Defaults to `"orbit"` when exactly two elements move, otherwise `"flat"`.
    * @returns {PermutationObject} This object.
    *
    * @example
@@ -363,6 +382,8 @@ class PermutationObject {
    *
    * @param {number} [duration=0.9] - Pause duration in seconds.
    * @param {Object} [options] - Animation options.
+   * @param {number} [options.delay=0] - Seconds to wait before the pause starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing used by the held progress value.
    * @returns {PermutationObject} This object.
    */
   pause(duration = 0.9, options = {}) {
@@ -465,6 +486,14 @@ class PermutationObject {
  *
  * @param {Array&lt;number|string>} elements - Elements to display and permute.
  * @param {Object} [options] - Display options passed to {@link PermutationObject}.
+ * @param {number} [options.x=width/2] - Center x-position.
+ * @param {number} [options.y=height/2] - Center y-position.
+ * @param {number} [options.spacing=96] - Horizontal spacing between slots.
+ * @param {number} [options.orbitHeight=76] - Height of circular swap arcs.
+ * @param {string} [options.title="Set and ordered tuple"] - Heading drawn above the object.
+ * @param {*} [options.color] - Main text and card-label color.
+ * @param {*} [options.accentColor] - Matrix, outline, and highlight color.
+ * @param {*} [options.cardColor] - Fill color for moving element cards.
  * @returns {PermutationObject}
  */
 function Permutation(elements, options = {}) {
@@ -502,13 +531,13 @@ function permutationColor(value) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li><li><a href="SceneQueueObject.html">SceneQueueObject</a></li><li><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li><li><a href="global.html#SceneQueue">SceneQueue</a></li><li><a href="global.html#SymmetricGroup">SymmetricGroup</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DihedralGroupObject.html">DihedralGroupObject</a></li><li><a href="DihedralTableObject.html">DihedralTableObject</a></li><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li><li><a href="SceneQueueObject.html">SceneQueueObject</a></li><li><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DihedralGroup">DihedralGroup</a></li><li><a href="global.html#DihedralTable">DihedralTable</a></li><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li><li><a href="global.html#SceneQueue">SceneQueue</a></li><li><a href="global.html#SymmetricGroup">SymmetricGroup</a></li><li><a href="global.html#latexImage">latexImage</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:38:11 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:45:09 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

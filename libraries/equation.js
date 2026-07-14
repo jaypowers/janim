@@ -21,8 +21,16 @@ class EquationObject {
    * @param {number} [options.x=0] - Center x-position.
    * @param {number} [options.y=0] - Center y-position.
    * @param {number} [options.size=36] - MathJax render size.
+   * @param {number} [options.rotation=0] - Initial rotation in radians.
+   * @param {number} [options.scale=1] - Initial scale multiplier.
+   * @param {number} [options.reveal=1] - Initial reveal amount from `0` hidden to `1` fully visible.
+   * @param {string} [options.revealDirection="left-to-right"] - Initial reveal direction: `"left-to-right"`, `"right-to-left"`, `"ltr"`, or `"rtl"`.
+   * @param {string} [options.revealStyle="smooth"] - Initial reveal style. Use `"smooth"` for clipping or `"letters"` for sliced letter reveal.
+   * @param {number} [options.revealPieces=0] - Number of reveal slices. `0` lets the object estimate from image width.
    * @param {*} [options.color="black"] - p5 color or RGB-like value.
-   * @param {*} [options.shineColor] - Highlight color used during reveal.
+   * @param {*} [options.shineColor=[255,255,220]] - Highlight color used during reveal.
+   * @param {number} [options.letterPop=0.24] - Scale pop applied to each letter slice during letter reveals.
+   * @param {boolean} [options.display=true] - Whether MathJax renders the expression in display mode.
    */
   constructor(latex, options = {}) {
     this.latex = latex;
@@ -56,6 +64,11 @@ class EquationObject {
    * @param {number} x - Target x-position.
    * @param {number} y - Target y-position.
    * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration] - If provided, animate over this many seconds; otherwise move immediately.
+   * @param {number} [options.delay=0] - Seconds to wait before the animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name (`"linear"`, `"easeInQuad"`, `"easeOutQuad"`, default sine) or easing function.
+   * @param {boolean} [options.loop=false] - Repeat the animation after it completes.
+   * @param {boolean} [options.yoyo=false] - Swap start and end values each time a looping animation repeats.
    * @returns {EquationObject} This object.
    */
   translate(x, y, options = {}) {
@@ -71,6 +84,18 @@ class EquationObject {
     return this;
   }
 
+  /**
+   * Rotates the equation immediately or over time.
+   *
+   * @param {number} angle - Target rotation in radians.
+   * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration] - If provided, animate over this many seconds; otherwise rotate immediately.
+   * @param {number} [options.delay=0] - Seconds to wait before the animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function.
+   * @param {boolean} [options.loop=false] - Repeat the animation after it completes.
+   * @param {boolean} [options.yoyo=false] - Swap start and end values each time a looping animation repeats.
+   * @returns {EquationObject} This object.
+   */
   rotate(angle, options = {}) {
     if (options.duration) {
       this.animate("rotation", angle, options);
@@ -81,6 +106,18 @@ class EquationObject {
     return this;
   }
 
+  /**
+   * Scales the equation immediately or over time.
+   *
+   * @param {number} amount - Target scale multiplier.
+   * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration] - If provided, animate over this many seconds; otherwise scale immediately.
+   * @param {number} [options.delay=0] - Seconds to wait before the animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function.
+   * @param {boolean} [options.loop=false] - Repeat the animation after it completes.
+   * @param {boolean} [options.yoyo=false] - Swap start and end values each time a looping animation repeats.
+   * @returns {EquationObject} This object.
+   */
   scale(amount, options = {}) {
     if (options.duration) {
       this.animate("scaleAmount", amount, options);
@@ -96,8 +133,18 @@ class EquationObject {
    *
    * @param {Object} [options] - Reveal options.
    * @param {number} [options.duration=1] - Duration in seconds.
+   * @param {number} [options.delay=0] - Seconds to wait before the reveal starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function for the reveal amount.
    * @param {boolean} [options.letters=false] - Reveal by approximate letter slices.
    * @param {string} [options.direction="left-to-right"] - Reveal direction.
+   * @param {string} [options.style] - Reveal style when `letters` is false.
+   * @param {number} [options.pieces] - Number of slices used by letter reveal.
+   * @param {*} [options.shineColor] - Temporary highlight color during the reveal.
+   * @param {number} [options.pop] - Per-letter scale pop during letter reveal.
+   * @param {number} [options.from=0] - Starting reveal amount.
+   * @param {number} [options.to=1] - Ending reveal amount.
+   * @param {boolean} [options.loop=false] - Repeat the reveal animation.
+   * @param {boolean} [options.yoyo=false] - Reverse direction on each loop.
    * @returns {EquationObject} This object.
    */
   reveal(options = {}) {
@@ -302,6 +349,18 @@ class EquationObject {
     };
   }
 
+  /**
+   * Animates one numeric property on the text object.
+   *
+   * @param {string} property - Property name to animate, such as `"x"` or `"y"`.
+   * @param {number} to - Target value.
+   * @param {Object} [options] - Animation options.
+   * @param {number} [options.from] - Override starting value. Defaults to the current property value.
+   * @param {number} [options.duration=1] - Animation duration in seconds.
+   * @param {number} [options.delay=0] - Seconds to wait before animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function.
+   * @returns {FloatingTextObject} This object.
+   */
   animate(property, to, options = {}) {
     this.stopAnimation(property);
     this.animations.push({
@@ -329,6 +388,15 @@ class EquationObject {
  *
  * @param {string} latex - LaTeX source.
  * @param {Object} [options] - Display options passed to {@link EquationObject}.
+ * @param {number} [options.x=0] - Center x-position.
+ * @param {number} [options.y=0] - Center y-position.
+ * @param {number} [options.size=36] - MathJax render size.
+ * @param {*} [options.color="black"] - p5 color or RGB-like value.
+ * @param {*} [options.shineColor] - Reveal highlight color.
+ * @param {number} [options.rotation=0] - Initial rotation in radians.
+ * @param {number} [options.scale=1] - Initial scale multiplier.
+ * @param {number} [options.reveal=1] - Initial reveal amount.
+ * @param {boolean} [options.display=true] - Whether MathJax renders in display mode.
  * @returns {EquationObject}
  */
 function Equation(latex, options = {}) {
@@ -359,6 +427,7 @@ class FloatingTextObject {
    * @param {number} [options.size=18] - Font size.
    * @param {*} [options.color] - p5 color or RGB-like value.
    * @param {number} [options.alpha=230] - Text alpha.
+   * @param {*} [options.align=CENTER] - p5 text alignment constant such as `CENTER`, `LEFT`, or `RIGHT`.
    */
   constructor(textValue, options = {}) {
     this.textValue = textValue;
@@ -382,6 +451,17 @@ class FloatingTextObject {
     return this;
   }
 
+  /**
+   * Moves the text immediately or over time.
+   *
+   * @param {number} x - Target local x-position.
+   * @param {number} y - Target local y-position.
+   * @param {Object} [options] - Animation options.
+   * @param {number} [options.duration] - If provided, animate over this many seconds; otherwise move immediately.
+   * @param {number} [options.delay=0] - Seconds to wait before the animation starts.
+   * @param {string|Function} [options.ease="easeInOutSine"] - Easing name or easing function.
+   * @returns {FloatingTextObject} This object.
+   */
   translate(x, y, options = {}) {
     if (options.duration) {
       this.animate("x", x, options);
@@ -441,6 +521,12 @@ class FloatingTextObject {
  *
  * @param {string} textValue - Text to draw.
  * @param {Object} [options] - Display options passed to {@link FloatingTextObject}.
+ * @param {number} [options.x=0] - Local x-position.
+ * @param {number} [options.y=0] - Local y-position.
+ * @param {number} [options.size=18] - Font size.
+ * @param {*} [options.color] - p5 color or RGB-like value.
+ * @param {number} [options.alpha=230] - Text alpha.
+ * @param {*} [options.align=CENTER] - p5 text alignment constant.
  * @returns {FloatingTextObject}
  */
 function FloatingText(textValue, options = {}) {

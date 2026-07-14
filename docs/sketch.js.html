@@ -1,4 +1,32 @@
-const state = {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: sketch.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: sketch.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const state = {
   scenes: null
 };
 
@@ -92,20 +120,20 @@ function createDihedralScene() {
     },
 
     animateDihedralGroup() {
-      for (let i = 0; i < this.d3.n; i += 1) {
+      for (let i = 0; i &lt; this.d3.n; i += 1) {
         this.d3.push("rotate");
       }
 
-      for (let i = 0; i < this.d3.n; i += 1) {
+      for (let i = 0; i &lt; this.d3.n; i += 1) {
         this.d3.push("flip", i + 1);
         this.d3.push("unflip", i + 1);
       }
 
-      for (let i = 0; i < this.d6.n; i += 1) {
+      for (let i = 0; i &lt; this.d6.n; i += 1) {
         this.d6.push("rotate");
       }
 
-      for (let i = 0; i < this.d6.n; i += 1) {
+      for (let i = 0; i &lt; this.d6.n; i += 1) {
         this.d6.push("flip", i + 1);
         this.d6.push("unflip", i + 1);
       }
@@ -321,7 +349,7 @@ function queueD4VertexMoves(target) {
   ];
 
   target.push("pause", 1.1);
-  for (let i = 0; i < moves.length; i += 1) {
+  for (let i = 0; i &lt; moves.length; i += 1) {
     target.push("map", moves[i], { duration: 1.7 });
     target.push("pause", 0.65);
   }
@@ -389,7 +417,7 @@ class SquareVertexPermutationObject {
       const raw = constrain((animation.elapsed - animation.delay) / animation.duration, 0, 1);
       this[animation.property] = lerp(animation.from, animation.to, animation.ease(raw));
 
-      if (raw < 1) return true;
+      if (raw &lt; 1) return true;
       if (animation.finishOrder) {
         this.order = animation.finishOrder.slice();
         this.fromPositions = this.positionsForOrder(this.order);
@@ -398,7 +426,7 @@ class SquareVertexPermutationObject {
       return false;
     });
 
-    if (this.running && this.animations.length === 0) this.startNextStep();
+    if (this.running &amp;&amp; this.animations.length === 0) this.startNextStep();
     return this;
   }
 
@@ -436,7 +464,7 @@ class SquareVertexPermutationObject {
   }
 
   drawCards() {
-    for (let value = 1; value <= 4; value += 1) {
+    for (let value = 1; value &lt;= 4; value += 1) {
       const fromIndex = this.fromPositions[value];
       const toIndex = this.toPositions[value];
       const fromPoint = this.cornerPoint(fromIndex);
@@ -470,7 +498,7 @@ class SquareVertexPermutationObject {
 
   startNextStep() {
     if (this.stepIndex >= this.steps.length) {
-      if (this.loopSteps && this.steps.length > 0) {
+      if (this.loopSteps &amp;&amp; this.steps.length > 0) {
         this.stepIndex = 0;
       } else {
         this.running = false;
@@ -512,7 +540,7 @@ class SquareVertexPermutationObject {
   /**
    * Animates labels to a chosen vertex order.
    *
-   * @param {Array<number>} nextOrder - Next vertex order.
+   * @param {Array&lt;number>} nextOrder - Next vertex order.
    * @param {Object} [options] - Animation options.
    * @param {number} [options.duration=1.7] - Animation duration in seconds.
    * @param {number} [options.delay=0] - Seconds to wait before animation starts.
@@ -549,7 +577,7 @@ class SquareVertexPermutationObject {
 
   positionsForOrder(order) {
     const positions = {};
-    for (let i = 0; i < order.length; i += 1) positions[order[i]] = i;
+    for (let i = 0; i &lt; order.length; i += 1) positions[order[i]] = i;
     return positions;
   }
 }
@@ -573,3 +601,26 @@ function squareVertexEasing(name) {
   if (name === "linear") return (t) => t;
   return (t) => -(Math.cos(Math.PI * t) - 1) / 2;
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DihedralGroupObject.html">DihedralGroupObject</a></li><li><a href="DihedralTableObject.html">DihedralTableObject</a></li><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li><li><a href="SceneQueueObject.html">SceneQueueObject</a></li><li><a href="SquareVertexPermutationObject.html">SquareVertexPermutationObject</a></li><li><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#DihedralGroup">DihedralGroup</a></li><li><a href="global.html#DihedralTable">DihedralTable</a></li><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li><li><a href="global.html#SceneQueue">SceneQueue</a></li><li><a href="global.html#SquareVertexPermutation">SquareVertexPermutation</a></li><li><a href="global.html#SymmetricGroup">SymmetricGroup</a></li><li><a href="global.html#latexImage">latexImage</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:46:01 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

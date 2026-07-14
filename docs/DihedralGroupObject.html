@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: EquationObject</title>
+    <title>JSDoc: Class: DihedralGroupObject</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: EquationObject</h1>
+    <h1 class="page-title">Class: DihedralGroupObject</h1>
 
     
 
@@ -28,12 +28,13 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>EquationObject<span class="signature">(latex, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>DihedralGroupObject<span class="signature">(n, &hellip;args)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Renders a LaTeX expression into a p5 image and animates it.
+            <div class="class-description">Animated regular polygon model for the dihedral group `D_n`.
 
-Use `Equation(...)` for mathematical labels, notation, and titles that should
-be typeset by MathJax.</div>
+The object draws an `n`-gon and animates rotations, flips, scaling, and
+translations. It can be driven immediately with methods such as `rotate()`,
+or with queued commands through `push(...)` and `run(...)`.</div>
         
     
 </header>
@@ -48,7 +49,7 @@ be typeset by MathJax.</div>
     
 
     
-    <h4 class="name" id="EquationObject"><span class="type-signature"></span>new EquationObject<span class="signature">(latex, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="DihedralGroupObject"><span class="type-signature"></span>new DihedralGroupObject<span class="signature">(n, &hellip;args)</span><span class="type-signature"></span></h4>
     
 
     
@@ -90,13 +91,13 @@ be typeset by MathJax.</div>
 
         <tr>
             
-                <td class="name"><code>latex</code></td>
+                <td class="name"><code>n</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -114,20 +115,23 @@ be typeset by MathJax.</div>
 
             
 
-            <td class="description last">LaTeX source.</td>
+            <td class="description last">Number of polygon sides. Values below 3 are clamped to 3.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>args</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">Object</span>
+|
+
+<span class="param-type">number</span>
 
 
             
@@ -136,18 +140,18 @@ be typeset by MathJax.</div>
             
                 <td class="attributes">
                 
-                    &lt;optional><br>
-                
 
                 
 
+                
+                    &lt;repeatable><br>
                 
                 </td>
             
 
             
 
-            <td class="description last">Display and animation options.
+            <td class="description last">Either `(x, y, options)` or one or more option objects.
                 <h6>Properties</h6>
                 
 
@@ -209,7 +213,7 @@ be typeset by MathJax.</div>
                 </td>
             
 
-            <td class="description last">Center x-position.</td>
+            <td class="description last">Center x-position when using object options.</td>
         </tr>
 
     
@@ -248,14 +252,14 @@ be typeset by MathJax.</div>
                 </td>
             
 
-            <td class="description last">Center y-position.</td>
+            <td class="description last">Center y-position when using object options.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>size</code></td>
+                <td class="name"><code>radius</code></td>
             
 
             <td class="type">
@@ -282,12 +286,12 @@ be typeset by MathJax.</div>
             
                 <td class="default">
                 
-                    36
+                    72
                 
                 </td>
             
 
-            <td class="description last">MathJax render size.</td>
+            <td class="description last">Polygon radius.</td>
         </tr>
 
     
@@ -321,7 +325,7 @@ be typeset by MathJax.</div>
             
                 <td class="default">
                 
-                    0
+                    -HALF_PI
                 
                 </td>
             
@@ -372,124 +376,7 @@ be typeset by MathJax.</div>
 
         <tr>
             
-                <td class="name"><code>reveal</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    1
-                
-                </td>
-            
-
-            <td class="description last">Initial reveal amount from `0` hidden to `1` fully visible.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>revealDirection</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "left-to-right"
-                
-                </td>
-            
-
-            <td class="description last">Initial reveal direction: `"left-to-right"`, `"right-to-left"`, `"ltr"`, or `"rtl"`.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>revealStyle</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "smooth"
-                
-                </td>
-            
-
-            <td class="description last">Initial reveal style. Use `"smooth"` for clipping or `"letters"` for sliced letter reveal.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>revealPieces</code></td>
+                <td class="name"><code>flipAxis</code></td>
             
 
             <td class="type">
@@ -521,14 +408,170 @@ be typeset by MathJax.</div>
                 </td>
             
 
-            <td class="description last">Number of reveal slices. `0` lets the object estimate from image width.</td>
+            <td class="description last">Initial reflection axis angle in radians.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>color</code></td>
+                <td class="name"><code>flip</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Whether to start reflected.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rotationName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "r"
+                
+                </td>
+            
+
+            <td class="description last">Symbol used for rotations in relation text.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reflectionName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "sigma"
+                
+                </td>
+            
+
+            <td class="description last">Symbol used for reflections in relation text.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>theme</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "blue"
+                
+                </td>
+            
+
+            <td class="description last">Built-in color theme; `"blue"` or `"purple"`.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fillColor</code></td>
             
 
             <td class="type">
@@ -555,19 +598,17 @@ be typeset by MathJax.</div>
             
                 <td class="default">
                 
-                    "black"
-                
                 </td>
             
 
-            <td class="description last">p5 color or RGB-like value.</td>
+            <td class="description last">Polygon fill color.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>shineColor</code></td>
+                <td class="name"><code>strokeColor</code></td>
             
 
             <td class="type">
@@ -594,19 +635,208 @@ be typeset by MathJax.</div>
             
                 <td class="default">
                 
-                    [255,255,220]
-                
                 </td>
             
 
-            <td class="description last">Highlight color used during reveal.</td>
+            <td class="description last">Polygon outline/radius color.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>letterPop</code></td>
+                <td class="name"><code>labelColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Vertex label color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>axisColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Reflection-axis color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>caption</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">false</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Plain-text fallback caption. Use `false` or `""` to hide.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>captionLatex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">false</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">LaTeX caption rendered through MathJax. Use `false` or `""` to disable.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>captionColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Caption color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>captionSize</code></td>
             
 
             <td class="type">
@@ -633,19 +863,19 @@ be typeset by MathJax.</div>
             
                 <td class="default">
                 
-                    0.24
+                    16
                 
                 </td>
             
 
-            <td class="description last">Scale pop applied to each letter slice during letter reveals.</td>
+            <td class="description last">Caption MathJax/text size.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>display</code></td>
+                <td class="name"><code>showAxis</code></td>
             
 
             <td class="type">
@@ -677,7 +907,7 @@ be typeset by MathJax.</div>
                 </td>
             
 
-            <td class="description last">Whether MathJax renders the expression in display mode.</td>
+            <td class="description last">Whether to draw the active reflection axis.</td>
         </tr>
 
     
@@ -725,7 +955,7 @@ be typeset by MathJax.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line17">line 17</a>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -756,14 +986,17 @@ be typeset by MathJax.</div>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const title = new Equation("\\text{Permutations}", {
+    <pre class="prettyprint"><code>const d4 = DihedralGroup(4, {
   x: width / 2,
-  y: 72,
-  size: 28,
-  color: color(220, 235, 255)
+  y: height / 2,
+  radius: 90,
+  captionLatex: "D_{4}:\\text{ rotations and flips}"
 });
 
-title.reveal({ duration: 1.5, letters: true });</code></pre>
+d4.push("rotate");
+d4.push("flip", 1);
+d4.push("unflip", 1);
+d4.run({ loop: true });</code></pre>
 
 
 
@@ -793,7 +1026,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
 
     
-    <h4 class="name" id="animate"><span class="type-signature"></span>animate<span class="signature">(property, to, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="FloatingTextObject.html">FloatingTextObject</a>}</span></h4>
+    <h4 class="name" id="flip"><span class="type-signature"></span>flip<span class="signature">(axisAngle<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
     
 
     
@@ -801,7 +1034,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
 
 <div class="description">
-    Animates one numeric property on the text object.
+    Reflects or unreflects the polygon across an axis.
 </div>
 
 
@@ -839,12 +1072,15 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
         <tr>
             
-                <td class="name"><code>property</code></td>
+                <td class="name"><code>axisAngle</code></td>
             
 
             <td class="type">
             
                 
+<span class="param-type">number</span>
+|
+
 <span class="param-type">string</span>
 
 
@@ -854,36 +1090,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
             
                 <td class="attributes">
                 
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Property name to animate, such as `"x"` or `"y"`.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>to</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
+                    &lt;optional><br>
                 
 
                 
@@ -894,7 +1101,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
             
 
-            <td class="description last">Target value.</td>
+            <td class="description last">Axis angle in radians, or `"x"`, `"horizontal"`, `"y"`, `"vertical"`, or `"vertex"`.</td>
         </tr>
 
     
@@ -957,43 +1164,6 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
         <tr>
             
-                <td class="name"><code>from</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Override starting value. Defaults to the current property value.</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>duration</code></td>
             
 
@@ -1021,12 +1191,10 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
             
                 <td class="default">
                 
-                    1
-                
                 </td>
             
 
-            <td class="description last">Animation duration in seconds.</td>
+            <td class="description last">If provided, animate over this many seconds; otherwise flip immediately.</td>
         </tr>
 
     
@@ -1111,702 +1279,6 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
         </tr>
 
     
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line364">line 364</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    This object.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="FloatingTextObject.html">FloatingTextObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="draw"><span class="type-signature"></span>draw<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="EquationObject.html">EquationObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Draws the rendered equation image.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line213">line 213</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    This object.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="EquationObject.html">EquationObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="reveal"><span class="type-signature"></span>reveal<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="EquationObject.html">EquationObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Reveals the equation with an optional letter-by-letter effect.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Reveal options.
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>duration</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    1
-                
-                </td>
-            
-
-            <td class="description last">Duration in seconds.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>delay</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">Seconds to wait before the reveal starts.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>ease</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "easeInOutSine"
-                
-                </td>
-            
-
-            <td class="description last">Easing name or easing function for the reveal amount.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>letters</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    false
-                
-                </td>
-            
-
-            <td class="description last">Reveal by approximate letter slices.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>direction</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "left-to-right"
-                
-                </td>
-            
-
-            <td class="description last">Reveal direction.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>style</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Reveal style when `letters` is false.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pieces</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Number of slices used by letter reveal.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>shineColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Temporary highlight color during the reveal.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>pop</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Per-letter scale pop during letter reveal.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>from</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">Starting reveal amount.</td>
-        </tr>
-
-    
 
         <tr>
             
@@ -1837,12 +1309,10 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
             
                 <td class="default">
                 
-                    1
-                
                 </td>
             
 
-            <td class="description last">Ending reveal amount.</td>
+            <td class="description last">Target flip amount. `1` reflected, `0` unreflected. Omit to toggle.</td>
         </tr>
 
     
@@ -1881,7 +1351,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Repeat the reveal animation.</td>
+            <td class="description last">Repeat the animation.</td>
         </tr>
 
     
@@ -1920,7 +1390,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Reverse direction on each loop.</td>
+            <td class="description last">Reverse direction on alternating loops.</td>
         </tr>
 
     
@@ -1968,7 +1438,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line150">line 150</a>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line176">line 176</a>
     </li></ul></dd>
     
 
@@ -2008,7 +1478,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     </dt>
     <dd>
         
-<span class="param-type"><a href="EquationObject.html">EquationObject</a></span>
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
 
 
     </dd>
@@ -2026,7 +1496,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
 
     
-    <h4 class="name" id="rotate"><span class="type-signature"></span>rotate<span class="signature">(angle, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="EquationObject.html">EquationObject</a>}</span></h4>
+    <h4 class="name" id="push"><span class="type-signature"></span>push<span class="signature">(&hellip;args)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
     
 
     
@@ -2034,7 +1504,386 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
 
 <div class="description">
-    Rotates the equation immediately or over time.
+    Queues an animation command.
+
+Commands include `"rotate"`, `"flip"`, `"unflip"`, and `"scale"`.
+Command options accept `duration`, `delay`, `ease`, `loop`, and `yoyo`.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Command name plus command-specific values/options, or a complete step object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line209">line 209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushFlip"><span class="type-signature"></span>pushFlip<span class="signature">(axisAngle, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues a flip step.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>axisAngle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Axis angle or axis name.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options: `duration`, `delay`, `ease`, `to`, `loop`, and `yoyo`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line330">line 330</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushRotate"><span class="type-signature"></span>pushRotate<span class="signature">(angle<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues a rotation step.
 </div>
 
 
@@ -2079,6 +1928,213 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
             
                 
 <span class="param-type">number</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Target angle, or options object to rotate by one symmetry step.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options: `duration`, `delay`, `ease`, `loop`, and `yoyo`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line293">line 293</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushScale"><span class="type-signature"></span>pushScale<span class="signature">(amount, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues a scale step.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>amount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
 
             
@@ -2096,7 +2152,447 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
             
 
-            <td class="description last">Target rotation in radians.</td>
+            <td class="description last">Target scale multiplier.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options: `duration`, `delay`, `ease`, `loop`, and `yoyo`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line314">line 314</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushTranslate"><span class="type-signature"></span>pushTranslate<span class="signature">(x, y, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues a translation step.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Target x-position.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Target y-position.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options: `duration`, `delay`, `ease`, `loop`, and `yoyo`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line276">line 276</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="rotate"><span class="type-signature"></span>rotate<span class="signature">(angle<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Rotates the polygon.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>angle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Target angle in radians, or options object to rotate by one symmetry step.</td>
         </tr>
 
     
@@ -2228,7 +2724,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Seconds to wait before the animation starts.</td>
+            <td class="description last">Seconds to wait before animation starts.</td>
         </tr>
 
     
@@ -2309,7 +2805,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Repeat the animation after it completes.</td>
+            <td class="description last">Repeat the animation.</td>
         </tr>
 
     
@@ -2348,7 +2844,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Swap start and end values each time a looping animation repeats.</td>
+            <td class="description last">Reverse direction on alternating loops.</td>
         </tr>
 
     
@@ -2396,7 +2892,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line99">line 99</a>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line126">line 126</a>
     </li></ul></dd>
     
 
@@ -2436,7 +2932,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     </dt>
     <dd>
         
-<span class="param-type"><a href="EquationObject.html">EquationObject</a></span>
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
 
 
     </dd>
@@ -2454,7 +2950,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
 
     
-    <h4 class="name" id="scale"><span class="type-signature"></span>scale<span class="signature">(amount, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="EquationObject.html">EquationObject</a>}</span></h4>
+    <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
     
 
     
@@ -2462,7 +2958,286 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
 
 <div class="description">
-    Scales the equation immediately or over time.
+    Starts queued commands.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Run options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>loop</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Restart after the last command.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>repeat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">Alias for `loop`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line375">line 375</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="scale"><span class="type-signature"></span>scale<span class="signature">(amount, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Scales the polygon immediately or over time.
 </div>
 
 
@@ -2656,7 +3431,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Seconds to wait before the animation starts.</td>
+            <td class="description last">Seconds to wait before animation starts.</td>
         </tr>
 
     
@@ -2737,7 +3512,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Repeat the animation after it completes.</td>
+            <td class="description last">Repeat the animation.</td>
         </tr>
 
     
@@ -2776,7 +3551,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Swap start and end values each time a looping animation repeats.</td>
+            <td class="description last">Reverse direction on alternating loops.</td>
         </tr>
 
     
@@ -2824,7 +3599,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line121">line 121</a>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -2864,7 +3639,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     </dt>
     <dd>
         
-<span class="param-type"><a href="EquationObject.html">EquationObject</a></span>
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
 
 
     </dd>
@@ -2882,7 +3657,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
 
     
-    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(x, y, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="EquationObject.html">EquationObject</a>}</span></h4>
+    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(x, y, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
     
 
     
@@ -2890,7 +3665,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
 
 <div class="description">
-    Moves the equation immediately or over time.
+    Moves the polygon immediately or over time.
 </div>
 
 
@@ -2952,7 +3727,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
             
 
-            <td class="description last">Target x-position.</td>
+            <td class="description last">Target center x-position.</td>
         </tr>
 
     
@@ -2983,7 +3758,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
 
             
 
-            <td class="description last">Target y-position.</td>
+            <td class="description last">Target center y-position.</td>
         </tr>
 
     
@@ -3115,7 +3890,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Seconds to wait before the animation starts.</td>
+            <td class="description last">Seconds to wait before animation starts.</td>
         </tr>
 
     
@@ -3157,7 +3932,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Easing name (`"linear"`, `"easeInQuad"`, `"easeOutQuad"`, default sine) or easing function.</td>
+            <td class="description last">Easing name (`"linear"`, `"easeInQuad"`, `"easeOutQuad"`, or default sine) or function.</td>
         </tr>
 
     
@@ -3196,7 +3971,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Repeat the animation after it completes.</td>
+            <td class="description last">Repeat the animation.</td>
         </tr>
 
     
@@ -3235,7 +4010,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
                 </td>
             
 
-            <td class="description last">Swap start and end values each time a looping animation repeats.</td>
+            <td class="description last">Reverse direction on alternating loops.</td>
         </tr>
 
     
@@ -3283,7 +4058,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line74">line 74</a>
+        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line101">line 101</a>
     </li></ul></dd>
     
 
@@ -3323,178 +4098,7 @@ title.reveal({ duration: 1.5, letters: true });</code></pre>
     </dt>
     <dd>
         
-<span class="param-type"><a href="EquationObject.html">EquationObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(dt<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="EquationObject.html">EquationObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Advances equation animations. Call once per p5 `draw()` frame.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>dt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Delta time in seconds.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line183">line 183</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    This object.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="EquationObject.html">EquationObject</a></span>
+<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
 
 
     </dd>

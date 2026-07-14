@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Class: DihedralTableObject</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Class: DihedralTableObject</h1>
 
     
 
@@ -28,7 +28,13 @@
 
 <header>
     
-        <h2></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>DihedralTableObject<span class="signature">(n, &hellip;args)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">Animated multiplication table for a dihedral group `D_n`.
+
+The table lays out rotations first, then reflections, and renders the cell
+entries with MathJax. It can reveal the grid, reveal entries, and highlight
+one multiplication lookup through queued `push(...)` commands.</div>
         
     
 </header>
@@ -38,82 +44,17 @@
     
         
 
-        
-
-
-<dl class="details">
-
+    
+    <h2>Constructor</h2>
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="DihedralGroup"><span class="type-signature"></span>DihedralGroup<span class="signature">(n, &hellip;args)</span><span class="type-signature"> &rarr; {<a href="DihedralGroupObject.html">DihedralGroupObject</a>}</span></h4>
+    <h4 class="name" id="DihedralTableObject"><span class="type-signature"></span>new DihedralTableObject<span class="signature">(n, &hellip;args)</span><span class="type-signature"></span></h4>
     
 
     
 
 
-
-<div class="description">
-    Creates a dihedral-group animation object.
-</div>
 
 
 
@@ -157,9 +98,6 @@
             
                 
 <span class="param-type">number</span>
-|
-
-<span class="param-type">Object</span>
 
 
             
@@ -177,7 +115,7 @@
 
             
 
-            <td class="description last">Number of polygon sides, or an options object with `n` or `sides`.</td>
+            <td class="description last">Dihedral index for `D_n`.</td>
         </tr>
 
     
@@ -213,409 +151,7 @@
 
             
 
-            <td class="description last">Either `(x, y, options)` or option objects passed to <a href="DihedralGroupObject.html"><code>DihedralGroupObject</code></a>.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_dihedral.js.html">libraries/dihedral.js</a>, <a href="libraries_dihedral.js.html#line554">line 554</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="DihedralGroupObject.html">DihedralGroupObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="DihedralTable"><span class="type-signature"></span>DihedralTable<span class="signature">(n, &hellip;args)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a dihedral multiplication table.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>n</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Dihedral index, or options object with `n` or `sides`.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>args</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-|
-
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                    &lt;repeatable><br>
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Either `(x, y, options)` or option objects passed to <a href="DihedralTableObject.html"><code>DihedralTableObject</code></a>.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line590">line 590</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="Equation"><span class="type-signature"></span>Equation<span class="signature">(latex, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="EquationObject.html">EquationObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a LaTeX equation object.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>latex</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">LaTeX source.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Display options passed to <a href="EquationObject.html"><code>EquationObject</code></a>.
+            <td class="description last">Either `(x, y, options)` or one or more option objects.
                 <h6>Properties</h6>
                 
 
@@ -672,12 +208,10 @@
             
                 <td class="default">
                 
-                    0
-                
                 </td>
             
 
-            <td class="description last">Center x-position.</td>
+            <td class="description last">Top-left x-position of the table.</td>
         </tr>
 
     
@@ -711,19 +245,19 @@
             
                 <td class="default">
                 
-                    0
+                    150
                 
                 </td>
             
 
-            <td class="description last">Center y-position.</td>
+            <td class="description last">Top-left y-position of the table.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>size</code></td>
+                <td class="name"><code>cellSize</code></td>
             
 
             <td class="type">
@@ -750,392 +284,17 @@
             
                 <td class="default">
                 
-                    36
-                
                 </td>
             
 
-            <td class="description last">MathJax render size.</td>
+            <td class="description last">Cell width/height in pixels. Defaults responsively from canvas width.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "black"
-                
-                </td>
-            
-
-            <td class="description last">p5 color or RGB-like value.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>shineColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Reveal highlight color.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>rotation</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">Initial rotation in radians.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>scale</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    1
-                
-                </td>
-            
-
-            <td class="description last">Initial scale multiplier.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>reveal</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    1
-                
-                </td>
-            
-
-            <td class="description last">Initial reveal amount.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>display</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">Whether MathJax renders in display mode.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line402">line 402</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="EquationObject.html">EquationObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="FloatingText"><span class="type-signature"></span>FloatingText<span class="signature">(textValue, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="FloatingTextObject.html">FloatingTextObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a simple floating p5 text object.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>textValue</code></td>
+                <td class="name"><code>title</code></td>
             
 
             <td class="type">
@@ -1150,37 +309,6 @@
             
                 <td class="attributes">
                 
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Text to draw.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
                     &lt;optional><br>
                 
 
@@ -1191,38 +319,21 @@
             
 
             
-
-            <td class="description last">Display options passed to <a href="FloatingTextObject.html"><code>FloatingTextObject</code></a>.
-                <h6>Properties</h6>
+                <td class="default">
                 
+                    "D_n"
+                
+                </td>
+            
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
+            <td class="description last">Plain fallback title.</td>
+        </tr>
 
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>x</code></td>
+                <td class="name"><code>gridProgress</code></td>
             
 
             <td class="type">
@@ -1254,14 +365,14 @@
                 </td>
             
 
-            <td class="description last">Local x-position.</td>
+            <td class="description last">Initial grid reveal progress from `0` to `1`.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>y</code></td>
+                <td class="name"><code>elementProgress</code></td>
             
 
             <td class="type">
@@ -1293,14 +404,354 @@
                 </td>
             
 
-            <td class="description last">Local y-position.</td>
+            <td class="description last">Initial cell-label reveal progress from `0` to `1`.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>size</code></td>
+                <td class="name"><code>backgroundColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Table background color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headerColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Header row/column color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cellColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Body cell color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gridColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Grid line color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>textColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Text and LaTeX label color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>highlightColor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Highlight row/column/cell color.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>heading</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">false</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Heading above the table. Use `false` or `""` to hide.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headingX</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    width/2
+                
+                </td>
+            
+
+            <td class="description last">Heading x-position.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headingY</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    34
+                
+                </td>
+            
+
+            <td class="description last">Heading y-position.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headingSize</code></td>
             
 
             <td class="type">
@@ -1332,14 +783,14 @@
                 </td>
             
 
-            <td class="description last">Font size.</td>
+            <td class="description last">Heading text size.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>color</code></td>
+                <td class="name"><code>headingColor</code></td>
             
 
             <td class="type">
@@ -1369,20 +820,20 @@
                 </td>
             
 
-            <td class="description last">p5 color or RGB-like value.</td>
+            <td class="description last">Heading color.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>alpha</code></td>
+                <td class="name"><code>titleLatex</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
             
@@ -1403,25 +854,23 @@
             
                 <td class="default">
                 
-                    230
-                
                 </td>
             
 
-            <td class="description last">Text alpha.</td>
+            <td class="description last">MathJax title shown above the grid.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>align</code></td>
+                <td class="name"><code>operationLatex</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">string</span>
 
 
             
@@ -1442,12 +891,12 @@
             
                 <td class="default">
                 
-                    CENTER
+                    "\\circ"
                 
                 </td>
             
 
-            <td class="description last">p5 text alignment constant.</td>
+            <td class="description last">Operation symbol in the top-left cell.</td>
         </tr>
 
     
@@ -1495,7 +944,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_equation.js.html">libraries/equation.js</a>, <a href="libraries_equation.js.html#line532">line 532</a>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -1520,28 +969,45 @@
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="FloatingTextObject.html">FloatingTextObject</a></span>
 
 
-    </dd>
-</dl>
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const table = DihedralTable(3, {
+  x: 48,
+  y: 150,
+  cellSize: 44,
+  heading: "D_3 multiplication"
+});
+
+table.push("revealGrid");
+table.push("revealElements");
+table.push("highlight", "r", "sigma");
+table.run();</code></pre>
+
+
+
+    
+    </div>
 
     
 
+    
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
 
         
             
@@ -1549,7 +1015,7 @@
     
 
     
-    <h4 class="name" id="Permutation"><span class="type-signature"></span>Permutation<span class="signature">(elements, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="PermutationObject.html">PermutationObject</a>}</span></h4>
+    <h4 class="name" id="highlight"><span class="type-signature"></span>highlight<span class="signature">(leftLabel, topLabel, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
     
 
     
@@ -1557,7 +1023,7 @@
 
 
 <div class="description">
-    Creates a permutation animation object.
+    Highlights a multiplication lookup.
 </div>
 
 
@@ -1595,13 +1061,13 @@
 
         <tr>
             
-                <td class="name"><code>elements</code></td>
+                <td class="name"><code>leftLabel</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;(number|string)></span>
+<span class="param-type">string</span>
 
 
             
@@ -1619,7 +1085,38 @@
 
             
 
-            <td class="description last">Elements to display and permute.</td>
+            <td class="description last">Row element label such as `"r"` or `"sigma"`.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>topLabel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Column element label such as `"r"` or `"sigma"`.</td>
         </tr>
 
     
@@ -1652,7 +1149,7 @@
 
             
 
-            <td class="description last">Display options passed to <a href="PermutationObject.html"><code>PermutationObject</code></a>.
+            <td class="description last">Animation options.
                 <h6>Properties</h6>
                 
 
@@ -1682,7 +1179,7 @@
 
         <tr>
             
-                <td class="name"><code>x</code></td>
+                <td class="name"><code>duration</code></td>
             
 
             <td class="type">
@@ -1709,19 +1206,19 @@
             
                 <td class="default">
                 
-                    width/2
+                    1
                 
                 </td>
             
 
-            <td class="description last">Center x-position.</td>
+            <td class="description last">Highlight fade-in duration in seconds.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>y</code></td>
+                <td class="name"><code>delay</code></td>
             
 
             <td class="type">
@@ -1748,103 +1245,28 @@
             
                 <td class="default">
                 
-                    height/2
+                    0
                 
                 </td>
             
 
-            <td class="description last">Center y-position.</td>
+            <td class="description last">Seconds to wait before animation starts.</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>spacing</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    96
-                
-                </td>
-            
-
-            <td class="description last">Horizontal spacing between slots.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>orbitHeight</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    76
-                
-                </td>
-            
-
-            <td class="description last">Height of circular swap arcs.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>title</code></td>
+                <td class="name"><code>ease</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
 
 
             
@@ -1865,123 +1287,12 @@
             
                 <td class="default">
                 
-                    "Set and ordered tuple"
+                    "easeInOutSine"
                 
                 </td>
             
 
-            <td class="description last">Heading drawn above the object.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Main text and card-label color.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>accentColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Matrix, outline, and highlight color.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>cardColor</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">Fill color for moving element cards.</td>
+            <td class="description last">Easing name or easing function.</td>
         </tr>
 
     
@@ -2029,1013 +1340,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_permutation.js.html">libraries/permutation.js</a>, <a href="libraries_permutation.js.html#line471">line 471</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="PermutationObject.html">PermutationObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="SceneQueue"><span class="type-signature"></span>SceneQueue<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="SceneQueueObject.html">SceneQueueObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a scene queue.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_scene.js.html">libraries/scene.js</a>, <a href="libraries_scene.js.html#line185">line 185</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="SceneQueueObject.html">SceneQueueObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="SquareVertexPermutation"><span class="type-signature"></span>SquareVertexPermutation<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="SquareVertexPermutationObject.html">SquareVertexPermutationObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a square vertex-permutation graphic.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Display options passed to <a href="SquareVertexPermutationObject.html"><code>SquareVertexPermutationObject</code></a>.
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    width/2
-                
-                </td>
-            
-
-            <td class="description last">Center x-position of the square.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    height/2
-                
-                </td>
-            
-
-            <td class="description last">Center y-position of the square.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>size</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    160
-                
-                </td>
-            
-
-            <td class="description last">Side length of the square in pixels.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>title</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "Square vertices"
-                
-                </td>
-            
-
-            <td class="description last">Heading shown above the square.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sketch.js.html">sketch.js</a>, <a href="sketch.js.html#line567">line 567</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="SquareVertexPermutationObject.html">SquareVertexPermutationObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="SymmetricGroup"><span class="type-signature"></span>SymmetricGroup<span class="signature">(n, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="SymmetricGroupObject.html">SymmetricGroupObject</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a symmetric-group animation object.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>n</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Number of labels in `S_n`.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Display options passed to <a href="SymmetricGroupObject.html"><code>SymmetricGroupObject</code></a>.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_symmetric.js.html">libraries/symmetric.js</a>, <a href="libraries_symmetric.js.html#line463">line 463</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="SymmetricGroupObject.html">SymmetricGroupObject</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="latexImage"><span class="type-signature">(async) </span>latexImage<span class="signature">(latex, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;p5.Image>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Renders a LaTeX string to a p5 image using MathJax.
-
-This is the low-level helper used by `Equation(...)`, table labels, and
-group captions. Most sketches should use `Equation(...)` directly, but this
-helper is useful when a custom object needs a cached p5 image of a formula.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>latex</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">LaTeX source to render.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">MathJax rendering options.
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>size</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    36
-                
-                </td>
-            
-
-            <td class="description last">MathJax em size and approximate pixel scale.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>color</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    "black"
-                
-                </td>
-            
-
-            <td class="description last">CSS color string, p5 color, or RGB-like value used in the SVG.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>display</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    true
-                
-                </td>
-            
-
-            <td class="description last">Whether MathJax should render in display mode.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="libraries_mathtex.js.html">libraries/mathtex.js</a>, <a href="libraries_mathtex.js.html#line15">line 15</a>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line192">line 192</a>
     </li></ul></dd>
     
 
@@ -3064,7 +1369,7 @@ helper is useful when a custom object needs a cached p5 image of a formula.
 
         
 <div class="param-desc">
-    Promise resolving to a p5 image containing the rendered SVG.
+    This object.
 </div>
 
 
@@ -3075,7 +1380,1399 @@ helper is useful when a custom object needs a cached p5 image of a formula.
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;p5.Image></span>
+<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="push"><span class="type-signature"></span>push<span class="signature">(&hellip;args)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues a table command.
+
+Supported commands are `"revealGrid"`, `"revealElements"`, and
+`"highlight", leftLabel, topLabel`. Each command may include an options
+object with `duration`, `delay`, and `ease`.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Command name, command values, and optional command options.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line250">line 250</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushHighlight"><span class="type-signature"></span>pushHighlight<span class="signature">(leftLabel, topLabel, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues a highlight step.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>leftLabel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Row element label.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>topLabel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Column element label.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options: `duration`, `delay`, and `ease`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line230">line 230</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushRevealElements"><span class="type-signature"></span>pushRevealElements<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues an element reveal step.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options: `duration`, `delay`, and `ease`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line217">line 217</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushRevealGrid"><span class="type-signature"></span>pushRevealGrid<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Queues a grid reveal step.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options: `duration`, `delay`, and `ease`.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line206">line 206</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="revealElements"><span class="type-signature"></span>revealElements<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Reveals the table labels and products.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">Animation duration in seconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Seconds to wait before animation starts.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ease</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "easeInOutSine"
+                
+                </td>
+            
+
+            <td class="description last">Easing name or easing function.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line175">line 175</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="revealGrid"><span class="type-signature"></span>revealGrid<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="DihedralTableObject.html">DihedralTableObject</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Reveals the table grid.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Animation options.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>duration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">Animation duration in seconds.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>delay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">Seconds to wait before animation starts.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ease</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "easeInOutSine"
+                
+                </td>
+            
+
+            <td class="description last">Easing name (`"linear"`, `"easeInQuad"`, `"easeOutQuad"`, or default sine) or function.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="libraries_dihedral-table.js.html">libraries/dihedral-table.js</a>, <a href="libraries_dihedral-table.js.html#line160">line 160</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    This object.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="DihedralTableObject.html">DihedralTableObject</a></span>
 
 
     </dd>
