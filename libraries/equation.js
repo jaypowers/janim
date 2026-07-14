@@ -1,4 +1,4 @@
-class Equation {
+class EquationObject {
   constructor(latex, options = {}) {
     this.latex = latex;
     this.x = options.x || 0;
@@ -269,6 +269,10 @@ class Equation {
     this.animations = this.animations.filter((animation) => animation.property !== property);
     return this;
   }
+}
+
+function Equation(latex, options = {}) {
+  return new EquationObject(latex, options);
 }
 
 function easing(name) {

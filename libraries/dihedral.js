@@ -1,9 +1,10 @@
-class DihedralGroup {
-  constructor(n, options = {}) {
+class DihedralGroupObject {
+  constructor(n, ...args) {
+    const options = groupOptionsFrom(args);
     this.n = Math.max(3, Math.floor(n || 3));
     this.x = options.x || 0;
     this.y = options.y || 0;
-    this.radius = options.radius || 120;
+    this.radius = options.radius || 72;
     this.rotation = options.rotation || -HALF_PI;
     this.scaleAmount = options.scale || 1;
     this.flipAxis = options.flipAxis || 0;
@@ -20,16 +21,22 @@ class DihedralGroup {
         this.reflectionName + " " + this.rotationName + " " + this.reflectionName + " = " + this.rotationName + "^-1"
       ]
     };
-    this.fillColor = colorParts(options.fillColor || [45, 95, 150]);
-    this.strokeColor = colorParts(options.strokeColor || [180, 220, 255]);
+    const theme = groupTheme(options.theme);
+    this.fillColor = colorParts(options.fillColor || theme.fillColor);
+    this.strokeColor = colorParts(options.strokeColor || theme.strokeColor);
     this.labelColor = colorParts(options.labelColor || [255, 255, 255]);
-    this.axisColor = colorParts(options.axisColor || [255, 255, 255]);
+    this.axisColor = colorParts(options.axisColor || [255, 220, 120]);
+    this.caption = options.caption === undefined ? "D" + this.n + ": all rotations, then all flips" : options.caption;
+    this.captionColor = colorParts(options.captionColor || [255, 255, 255]);
+    this.captionSize = options.captionSize || 16;
     this.showAxis = options.showAxis !== false;
     this.animations = [];
     this.steps = [];
     this.running = false;
     this.loopSteps = false;
     this.stepIndex = 0;
+    this.nextFlipAxisIndex = 0;
+    this.currentFlipAxis = null;
   }
 
   translate(x, y, options = {}) {
@@ -94,6 +101,65 @@ class DihedralGroup {
     return this.flipAmount < 0.5 ? 1 : 0;
   }
 
+  push(...args) {
+    const step = this.stepFrom(args);
+    this.steps.push(step);
+    return this;
+  }
+
+  stepFrom(args) {
+    if (typeof args[0] === "object" && args[0]) return args[0];
+
+    const type = args[0];
+    const value = args[1];
+    const extraOptions = typeof value === "object" && value ? value : args[2] || {};
+    const options = Object.assign({ duration: 2, ease: "easeInOutSine" }, extraOptions);
+
+    const hasOptionsAsSecondArgument = typeof value === "object" && value;
+    const stepValue = hasOptionsAsSecondArgument ? undefined : value;
+
+    if (type === "rotate") return { type: "rotate", angle: stepValue === undefined ? null : stepValue, options };
+    if (type === "flip") return { type: "flip", axisAngle: this.flipAxisFrom(stepValue), options };
+    if (type === "unflip") return { type: "flip", axisAngle: this.unflipAxisFrom(stepValue), options: Object.assign({}, options, { to: 0 }) };
+    if (type === "scale") return { type: "scale", amount: value, options };
+
+    return { type: "rotate", angle: null, options };
+  }
+
+  flipAxisFrom(axis) {
+    if (axis !== undefined) {
+      const axisNumber = this.symmetryAxisNumber(axis);
+      this.currentFlipAxis = this.symmetryAxis(axisNumber);
+      this.nextFlipAxisIndex = axisNumber % this.n;
+      return this.currentFlipAxis;
+    }
+
+    this.currentFlipAxis = this.rotation + this.nextFlipAxisIndex * Math.PI / this.n;
+    return this.currentFlipAxis;
+  }
+
+  unflipAxisFrom(axis) {
+    if (axis !== undefined) {
+      const axisNumber = this.symmetryAxisNumber(axis);
+      this.currentFlipAxis = this.symmetryAxis(axisNumber);
+      this.nextFlipAxisIndex = axisNumber % this.n;
+      return this.currentFlipAxis;
+    }
+
+    const currentAxis = this.currentFlipAxis === null ? this.flipAxisFrom() : this.currentFlipAxis;
+    this.nextFlipAxisIndex = (this.nextFlipAxisIndex + 1) % this.n;
+    return currentAxis;
+  }
+
+  symmetryAxis(axisNumber) {
+    return this.rotation + (axisNumber - 1) * Math.PI / this.n;
+  }
+
+  symmetryAxisNumber(axisNumber) {
+    const wholeNumber = Math.floor(Number(axisNumber) || 1);
+    return ((wholeNumber - 1) % this.n + this.n) % this.n + 1;
+  }
+
   pushTranslate(x, y, options = {}) {
     this.steps.push({
       type: "translate",
@@ -133,24 +199,6 @@ class DihedralGroup {
       axisAngle,
       options
     });
-    return this;
-  }
-
-  pushAllRotations(options = {}) {
-    for (let i = 0; i < this.n; i += 1) {
-      this.pushRotate(options);
-    }
-    return this;
-  }
-
-  pushAllFlips(options = {}) {
-    const axes = this.symmetryAxes();
-
-    for (let i = 0; i < axes.length; i += 1) {
-      this.pushFlip(axes[i], options);
-      this.pushFlip(axes[i], Object.assign({}, options, { to: 0 }));
-    }
-
     return this;
   }
 
@@ -214,6 +262,7 @@ class DihedralGroup {
 
     this.drawVertexLabels();
     if (this.showAxis) this.drawSymmetryAxis();
+    this.drawCaption();
     return this;
   }
 
@@ -259,6 +308,16 @@ class DihedralGroup {
     strokeWeight(2);
     line(-length, 0, length, 0);
     pop();
+  }
+
+  drawCaption() {
+    if (!this.caption) return;
+
+    fill(this.captionColor.r, this.captionColor.g, this.captionColor.b, 210);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(this.captionSize);
+    text(this.caption, this.x, this.y + this.radius + 48);
   }
 
   flipScale() {
@@ -321,6 +380,46 @@ class DihedralGroup {
     });
     return this;
   }
+}
+
+function DihedralGroup(n, ...args) {
+  if (typeof n === "object" && n) {
+    args = [n];
+    n = n.n || n.sides || 3;
+  }
+
+  return new DihedralGroupObject(n, ...args);
+}
+
+function groupOptionsFrom(args) {
+  const options = {};
+
+  if (typeof args[0] === "number") {
+    options.x = args[0];
+    options.y = args[1] || 0;
+    Object.assign(options, args[2] || {});
+    return options;
+  }
+
+  for (let i = 0; i < args.length; i += 1) {
+    Object.assign(options, args[i] || {});
+  }
+
+  return options;
+}
+
+function groupTheme(name) {
+  if (name === "purple") {
+    return {
+      fillColor: [80, 70, 150],
+      strokeColor: [215, 205, 255]
+    };
+  }
+
+  return {
+    fillColor: [45, 95, 150],
+    strokeColor: [180, 220, 255]
+  };
 }
 
 function updateAnimationFor(target, seconds) {

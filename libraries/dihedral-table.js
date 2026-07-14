@@ -1,6 +1,7 @@
-class DihedralTable {
-  constructor(n, options = {}) {
-    this.n = Math.max(3, Math.floor(n || 3));
+class DihedralTableObject {
+  constructor(n, ...args) {
+    const options = tableOptionsFrom(n, args);
+    this.n = Math.max(1, Math.floor(n || 3));
     this.x = options.x || 40;
     this.y = options.y || 120;
     this.cellSize = options.cellSize || 54;
@@ -16,6 +17,11 @@ class DihedralTable {
     this.gridColor = tableColorParts(options.gridColor || [170, 220, 255]);
     this.textColor = tableColorParts(options.textColor || [245, 250, 255]);
     this.highlightColor = tableColorParts(options.highlightColor || [255, 218, 105]);
+    this.heading = options.heading === undefined ? "Dihedral symmetries and their multiplication table" : options.heading;
+    this.headingX = options.headingX === undefined ? width / 2 : options.headingX;
+    this.headingY = options.headingY === undefined ? 34 : options.headingY;
+    this.headingSize = options.headingSize || 18;
+    this.headingColor = tableColorParts(options.headingColor || [255, 255, 255]);
     this.titleLatex = options.titleLatex || "D_{" + this.n + "}\\text{ multiplication table}";
     this.operationLatex = options.operationLatex || "\\circ";
     this.elements = this.makeElements();
@@ -139,6 +145,51 @@ class DihedralTable {
     return this;
   }
 
+  push(...args) {
+    const type = args[0];
+    const options = args[args.length - 1];
+    const hasOptions = typeof options === "object" && options && !Array.isArray(options);
+    const stepOptions = Object.assign({}, this.defaultStepOptions(type), hasOptions ? options : {});
+
+    if (type === "revealGrid") this.steps.push({ type: "revealGrid", options: stepOptions });
+    if (type === "revealElements") this.steps.push({ type: "revealElements", options: stepOptions });
+    if (type === "highlight") {
+      this.steps.push({
+        type: "highlight",
+        leftLabel: args[1],
+        topLabel: args[2],
+        options: stepOptions
+      });
+    }
+
+    return this;
+  }
+
+  defaultStepOptions(type) {
+    if (type === "revealGrid") {
+      return {
+        duration: 2.5,
+        ease: "easeInOutSine"
+      };
+    }
+
+    if (type === "revealElements") {
+      return {
+        duration: 4,
+        ease: "linear"
+      };
+    }
+
+    if (type === "highlight") {
+      return {
+        duration: 1.25,
+        ease: "easeInOutSine"
+      };
+    }
+
+    return {};
+  }
+
   run() {
     this.running = true;
     this.stepIndex = 0;
@@ -156,12 +207,23 @@ class DihedralTable {
   }
 
   draw() {
+    this.drawHeading();
     this.drawTitle();
     this.drawCells();
     this.drawHighlights();
     this.drawGrid();
     this.drawLabels();
     return this;
+  }
+
+  drawHeading() {
+    if (!this.heading) return;
+
+    fill(this.headingColor.r, this.headingColor.g, this.headingColor.b, 180);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(this.headingSize);
+    text(this.heading, this.headingX, this.headingY);
   }
 
   drawTitle() {
@@ -412,6 +474,49 @@ class DihedralTable {
     });
     return this;
   }
+}
+
+function DihedralTable(n, ...args) {
+  if (typeof n === "object" && n) {
+    args = [n];
+    n = n.n || n.sides || 3;
+  }
+
+  return new DihedralTableObject(n, ...args);
+}
+
+function tableOptionsFrom(n, args) {
+  const options = {};
+
+  if (typeof args[0] === "number") {
+    options.x = args[0];
+    options.y = args[1] || 0;
+    Object.assign(options, args[2] || {});
+  } else {
+    for (let i = 0; i < args.length; i += 1) {
+      Object.assign(options, args[i] || {});
+    }
+  }
+
+  const tableN = Math.max(1, Math.floor(n || 3));
+  const tableSize = 2 * tableN + 1;
+  const automaticCellSize = Math.min(54, Math.max(28, (width * 0.42) / tableSize));
+  const cellSize = options.cellSize || automaticCellSize;
+
+  options.cellSize = cellSize;
+  if (options.x === undefined) options.x = width - cellSize * tableSize - 36;
+  if (options.y === undefined) options.y = 150;
+
+  return Object.assign({
+    gridProgress: 0,
+    elementProgress: 0,
+    backgroundColor: color(9, 24, 45),
+    headerColor: color(22, 55, 92),
+    cellColor: color(11, 31, 58),
+    gridColor: color(170, 220, 255),
+    textColor: color(245, 250, 255),
+    highlightColor: color(255, 220, 110)
+  }, options);
 }
 
 function updateTableAnimationFor(target, seconds) {
