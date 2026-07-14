@@ -151,7 +151,7 @@ function createSymmetricScene() {
     contrast: null,
 
     setup() {
-      this.title = new Equation("S_4 = \\text{all bijections } \\{1,2,3,4\\}\\to\\{1,2,3,4\\}", {
+      this.title = new Equation("S_4 = \\text{all permutations of four labels}", {
         x: width / 2,
         y: 76,
         size: 25,
@@ -171,19 +171,19 @@ function createSymmetricScene() {
         x: width / 2,
         y: height / 2 + 22,
         spacing: Math.min(82, Math.max(62, width * 0.06)),
-        title: "S_4 contains every rearrangement of the four labels",
+        title: "Every label-switch is allowed",
         accentColor: [255, 218, 105],
         secondaryColor: [130, 225, 205]
       });
 
-      this.note = FloatingText("D_4 has 8 square motions. S_4 has 24 permutations, including label switches no square can physically do.", {
+      this.note = new Equation("\\text{D}_4\\text{ has 8 square motions. }\\text{S}_4\\text{ has 24 label-switches.}", {
         x: width / 2,
         y: height - 76,
         size: 18,
         color: color(210, 225, 245)
       });
 
-      this.contrast = FloatingText("Example: swapping only 1 and 2 is in S_4, but it is not a symmetry of the square.", {
+      this.contrast = new Equation("\\text{For example, swapping only 1 and 2 is in }\\text{S}_4\\text{, but not in }\\text{D}_4\\text{.}", {
         x: width / 2,
         y: height - 48,
         size: 17,
@@ -274,7 +274,7 @@ function createDihedralPermutationScene() {
         color: color(255, 225, 150)
       });
 
-      this.differenceNote = FloatingText("D_4 gives only the 8 label-switches that come from rigid square motions. S_4 has all 24 possible label-switches.", {
+      this.differenceNote = new Equation("\\text{D}_4\\text{ gives only the 8 rigid square motions. }\\text{S}_4\\text{ has all 24 label-switches.}", {
         x: width / 2,
         y: height - 50,
         size: 18,

@@ -27,6 +27,8 @@ class DihedralGroupObject {
     this.labelColor = colorParts(options.labelColor || [255, 255, 255]);
     this.axisColor = colorParts(options.axisColor || [255, 220, 120]);
     this.caption = options.caption === undefined ? "D" + this.n + ": all rotations, then all flips" : options.caption;
+    this.captionLatex = options.captionLatex === undefined ? "D_{" + this.n + "}:\\text{ all rotations, then all flips}" : options.captionLatex;
+    this.captionImage = null;
     this.captionColor = colorParts(options.captionColor || [255, 255, 255]);
     this.captionSize = options.captionSize || 16;
     this.showAxis = options.showAxis !== false;
@@ -37,6 +39,7 @@ class DihedralGroupObject {
     this.stepIndex = 0;
     this.nextFlipAxisIndex = 0;
     this.currentFlipAxis = null;
+    this.loadCaptionLatex();
   }
 
   translate(x, y, options = {}) {
@@ -313,11 +316,31 @@ class DihedralGroupObject {
   drawCaption() {
     if (!this.caption) return;
 
+    if (this.captionImage) {
+      imageMode(CENTER);
+      tint(this.captionColor.r, this.captionColor.g, this.captionColor.b, 210);
+      image(this.captionImage, this.x, this.y + this.radius + 48);
+      noTint();
+      return;
+    }
+
     fill(this.captionColor.r, this.captionColor.g, this.captionColor.b, 210);
     noStroke();
     textAlign(CENTER, CENTER);
     textSize(this.captionSize);
     text(this.caption, this.x, this.y + this.radius + 48);
+  }
+
+  loadCaptionLatex() {
+    if (!this.captionLatex) return;
+
+    latexImage(this.captionLatex, {
+      size: this.captionSize,
+      color: "white",
+      display: false
+    }).then((img) => {
+      this.captionImage = img;
+    });
   }
 
   flipScale() {
