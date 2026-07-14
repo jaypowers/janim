@@ -1,0 +1,13 @@
+{
+  "name": "janim",
+  "version": "0.1.0",
+  "private": true,
+  "description": "p5.js math animation experiments for groups and permutations.",
+  "scripts": {
+    "docs": "jsdoc -c jsdoc.json",
+    "check": "node --check sketch.js && node --check libraries/equation.js && node --check libraries/permutation.js && node --check libraries/dihedral.js && node --check libraries/dihedral-table.js"
+  },
+  "devDependencies": {
+    "jsdoc": "^4.0.4"
+  }
+}

@@ -1,4 +1,29 @@
+/**
+ * Renders a LaTeX expression into a p5 image and animates it.
+ *
+ * Use `Equation(...)` for mathematical labels, notation, and titles that should
+ * be typeset by MathJax.
+ *
+ * @example
+ * const title = new Equation("\\text{Permutations}", {
+ *   x: width / 2,
+ *   y: 72,
+ *   size: 28,
+ *   color: color(220, 235, 255)
+ * });
+ *
+ * title.reveal({ duration: 1.5, letters: true });
+ */
 class EquationObject {
+  /**
+   * @param {string} latex - LaTeX source.
+   * @param {Object} [options] - Display and animation options.
+   * @param {number} [options.x=0] - Center x-position.
+   * @param {number} [options.y=0] - Center y-position.
+   * @param {number} [options.size=36] - MathJax render size.
+   * @param {*} [options.color="black"] - p5 color or RGB-like value.
+   * @param {*} [options.shineColor] - Highlight color used during reveal.
+   */
   constructor(latex, options = {}) {
     this.latex = latex;
     this.x = options.x || 0;
@@ -25,6 +50,14 @@ class EquationObject {
     });
   }
 
+  /**
+   * Moves the equation immediately or over time.
+   *
+   * @param {number} x - Target x-position.
+   * @param {number} y - Target y-position.
+   * @param {Object} [options] - Animation options.
+   * @returns {EquationObject} This object.
+   */
   translate(x, y, options = {}) {
     if (options.duration) {
       this.animate("x", x, options);
@@ -58,6 +91,15 @@ class EquationObject {
     return this;
   }
 
+  /**
+   * Reveals the equation with an optional letter-by-letter effect.
+   *
+   * @param {Object} [options] - Reveal options.
+   * @param {number} [options.duration=1] - Duration in seconds.
+   * @param {boolean} [options.letters=false] - Reveal by approximate letter slices.
+   * @param {string} [options.direction="left-to-right"] - Reveal direction.
+   * @returns {EquationObject} This object.
+   */
   reveal(options = {}) {
     this.revealDirection = options.direction || this.revealDirection;
     this.revealStyle = options.letters ? "letters" : options.style || this.revealStyle;
@@ -85,6 +127,12 @@ class EquationObject {
     return this;
   }
 
+  /**
+   * Advances equation animations. Call once per p5 `draw()` frame.
+   *
+   * @param {number} [dt] - Delta time in seconds.
+   * @returns {EquationObject} This object.
+   */
   update(dt) {
     const seconds = dt || deltaTime / 1000 || 1 / 60;
 
@@ -110,6 +158,11 @@ class EquationObject {
     return this;
   }
 
+  /**
+   * Draws the rendered equation image.
+   *
+   * @returns {EquationObject} This object.
+   */
   draw() {
     if (!this.image) return this;
 
@@ -271,8 +324,127 @@ class EquationObject {
   }
 }
 
+/**
+ * Creates a LaTeX equation object.
+ *
+ * @param {string} latex - LaTeX source.
+ * @param {Object} [options] - Display options passed to {@link EquationObject}.
+ * @returns {EquationObject}
+ */
 function Equation(latex, options = {}) {
   return new EquationObject(latex, options);
+}
+
+/**
+ * Simple p5 text label that can be attached to scene objects.
+ *
+ * Use this when plain text is better than LaTeX. `Permutation.push("text")`
+ * creates one of these automatically for unrecognized string commands.
+ *
+ * @example
+ * const note = FloatingText("top row is input", {
+ *   x: 0,
+ *   y: 180,
+ *   size: 18
+ * });
+ *
+ * permutation.push(note);
+ */
+class FloatingTextObject {
+  /**
+   * @param {string} textValue - Text to draw.
+   * @param {Object} [options] - Display options.
+   * @param {number} [options.x=0] - Local x-position.
+   * @param {number} [options.y=0] - Local y-position.
+   * @param {number} [options.size=18] - Font size.
+   * @param {*} [options.color] - p5 color or RGB-like value.
+   * @param {number} [options.alpha=230] - Text alpha.
+   */
+  constructor(textValue, options = {}) {
+    this.textValue = textValue;
+    this.x = options.x || 0;
+    this.y = options.y || 0;
+    this.size = options.size || 18;
+    this.align = options.align || CENTER;
+    this.color = colorParts(options.color || [255, 255, 255]);
+    this.alpha = options.alpha === undefined ? 230 : options.alpha;
+    this.animations = [];
+  }
+
+  /**
+   * Changes the text.
+   *
+   * @param {string} textValue - New text.
+   * @returns {FloatingTextObject} This object.
+   */
+  text(textValue) {
+    this.textValue = textValue;
+    return this;
+  }
+
+  translate(x, y, options = {}) {
+    if (options.duration) {
+      this.animate("x", x, options);
+      this.animate("y", y, options);
+    } else {
+      this.x = x;
+      this.y = y;
+    }
+    return this;
+  }
+
+  update(dt) {
+    const seconds = dt || deltaTime / 1000 || 1 / 60;
+
+    this.animations = this.animations.filter((animation) => {
+      animation.elapsed += seconds;
+      const raw = constrain((animation.elapsed - animation.delay) / animation.duration, 0, 1);
+      this[animation.property] = lerp(animation.from, animation.to, animation.ease(raw));
+      return raw < 1;
+    });
+
+    return this;
+  }
+
+  /**
+   * Draws the text, optionally offset by a parent object's position.
+   *
+   * @param {number} [offsetX=0] - Parent x-offset.
+   * @param {number} [offsetY=0] - Parent y-offset.
+   * @returns {FloatingTextObject} This object.
+   */
+  draw(offsetX = 0, offsetY = 0) {
+    fill(this.color.r, this.color.g, this.color.b, this.alpha);
+    noStroke();
+    textAlign(this.align, CENTER);
+    textSize(this.size);
+    text(this.textValue, offsetX + this.x, offsetY + this.y);
+    return this;
+  }
+
+  animate(property, to, options = {}) {
+    this.animations.push({
+      property,
+      from: options.from === undefined ? this[property] : options.from,
+      to,
+      duration: Math.max(0.0001, options.duration || 1),
+      delay: options.delay || 0,
+      elapsed: 0,
+      ease: easing(options.ease)
+    });
+    return this;
+  }
+}
+
+/**
+ * Creates a simple floating p5 text object.
+ *
+ * @param {string} textValue - Text to draw.
+ * @param {Object} [options] - Display options passed to {@link FloatingTextObject}.
+ * @returns {FloatingTextObject}
+ */
+function FloatingText(textValue, options = {}) {
+  return new FloatingTextObject(textValue, options);
 }
 
 function easing(name) {

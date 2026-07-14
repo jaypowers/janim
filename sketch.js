@@ -1,129 +1,79 @@
-let d3;
-let d6;
-let table;
-let groupLabel;
-let tableN = 1;
+const state = {
+  title: null,
+  permutation: null
+};
+
+function preload() {
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   imageMode(CENTER);
   textAlign(CENTER, CENTER);
 
-  groupLabel = new Equation("D_n = \\langle r, \\sigma \\mid r^n=e,\\ \\sigma^2=e,\\ \\sigma r\\sigma=r^{-1} \\rangle", {
+  state.title = new Equation("\\text{Permutations: sets, tuples, and order}", {
     x: width / 2,
-    y: 84,
-    size: 26,
-    color: color(200, 200, 255),
+    y: 72,
+    size: 28,
+    color: color(220, 235, 255),
     shineColor: color(255)
   });
 
-  groupLabel.reveal({
+  state.title.reveal({
     direction: "left-to-right",
-    duration: 2,
+    duration: 1.5,
     ease: "easeInOutSine",
-    letters: true,
-    pop: 0.22
+    letters: true
   });
 
-  d3 = new DihedralGroup(3, {
-    x: width * 0.25,
-    y: height / 2 + 80
+  state.permutation = new Permutation([1, 2, 3], {
+    x: width / 2,
+    y: height / 2 + 30,
+    title: "The same set can be arranged in different orders"
   });
 
-  d6 = new DihedralGroup(6, {
-    x: width * 0.65,
-    y: height / 2 + 80,
-    theme: "purple"
+  state.permutation.push("The set {1, 2, 3} does not care about order.", {
+    x: 0,
+    y: -220,
+    size: 18,
+    color: color(210, 225, 245)
   });
 
-  table = new DihedralTable(tableN);
+  state.permutation.push("The tuple (1, 2, 3) does care about order.", {
+    x: 0,
+    y: -194,
+    size: 18,
+    color: color(255, 225, 150)
+  });
 
-  animateDihedralGroup();
-  animateDihedralTable();
-}
+  state.permutation.push("Two-line notation: top row is input, bottom row is image.", {
+    x: 0,
+    y: 202,
+    size: 18,
+    color: color(210, 225, 245)
+  });
 
-function animateDihedralGroup() {
-  for (let i = 0; i < d3.n; i += 1) {
-    d3.push("rotate");
-  }
-
-  for (let i = 0; i < d3.n; i += 1) {
-    d3.push("flip", i + 1);
-    d3.push("unflip", i + 1);
-  }
-
-  for (let i = 0; i < d6.n; i += 1) {
-    d6.push("rotate");
-  }
-
-  for (let i = 0; i < d6.n; i += 1) {
-    d6.push("flip", i + 1);
-    d6.push("unflip", i + 1);
-  }
-
-  d3.run({ loop: true });
-  d6.run({ loop: true });
-}
-
-function animateDihedralTable() {
-  const highlightLeft = table.n === 1 ? "e" : "r";
-
-  table.push("revealGrid");
-  table.push("revealElements");
-  table.push("highlight", highlightLeft, "sigma");
-
-  table.run();
+  state.permutation.push("pause");
+  state.permutation.push("map", [1, 3, 2]);
+  state.permutation.push("pause");
+  state.permutation.push("map", [2, 1, 3]);
+  state.permutation.push("pause");
+  state.permutation.push("map", [2, 3, 1]);
+  state.permutation.push("pause");
+  state.permutation.push("map", [3, 1, 2]);
+  state.permutation.push("pause");
+  state.permutation.push("map", [3, 2, 1]);
+  state.permutation.push("pause");
+  state.permutation.push("map", [1, 2, 3]);
+  state.permutation.run({ loop: true });
 }
 
 function draw() {
   background(5, 16, 32);
 
-  groupLabel.update();
-  groupLabel.draw();
+  state.title.update();
+  state.title.draw();
 
-  d3.update();
-  d3.draw();
-
-  d6.update();
-  d6.draw();
-
-  table.update();
-  table.draw();
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-
-  groupLabel = new Equation("D_n = \\langle r, \\sigma \\mid r^n=e,\\ \\sigma^2=e,\\ \\sigma r\\sigma=r^{-1} \\rangle", {
-    x: width / 2,
-    y: 84,
-    size: 26,
-    color: color(200, 200, 255),
-    shineColor: color(255)
-  });
-
-  groupLabel.reveal({
-    direction: "left-to-right",
-    duration: 2,
-    ease: "easeInOutSine",
-    letters: true,
-    pop: 0.22
-  });
-
-  d3 = new DihedralGroup(3, {
-    x: width * 0.25,
-    y: height / 2 + 8,
-    theme: "blue"
-  });
-
-  d6 = new DihedralGroup(6, {
-    x: width * 0.65,
-    y: height / 2 + 80,
-    theme: "purple"
-  });
-
-  table = new DihedralTable(tableN);
-
-  animateDihedralGroup();
-  animateDihedralTable();
+  state.permutation.update();
+  state.permutation.draw();
 }

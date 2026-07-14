@@ -1,0 +1,17 @@
+{
+  "source": {
+    "include": ["sketch.js", "libraries"],
+    "includePattern": ".+\\.js$",
+    "excludePattern": "(^|\\/|\\\\)docs(\\/|\\\\)"
+  },
+  "opts": {
+    "destination": "docs",
+    "encoding": "utf8",
+    "readme": "README.md",
+    "recurse": true
+  },
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+  }
+}

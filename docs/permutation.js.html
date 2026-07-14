@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: permutation.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: permutation.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Animated display for a finite permutation of a small ordered set.
+ *
+ * A `PermutationObject` shows three related ideas at once:
+ * a set such as `{1, 2, 3}`, an ordered tuple such as `(2, 3, 1)`,
+ * and the standard two-line permutation notation rendered with LaTeX.
+ *
+ * In two-line notation, the top row is the input and the bottom row is the
+ * image. For example, `\begin{pmatrix}1 &amp; 2 &amp; 3\\2 &amp; 3 &amp; 1\end{pmatrix}`
+ * means `1 -> 2`, `2 -> 3`, and `3 -> 1`.
+ *
+ * @example
+ * const p = new Permutation([1, 2, 3], {
+ *   x: width / 2,
+ *   y: height / 2,
+ *   title: "All six permutations"
+ * });
+ *
+ * p.push("pause");
+ * p.push("map", [1, 3, 2]);
+ * p.push("pause");
+ * p.push("swap", 1, 3);
+ * p.run({ loop: true });
+ */
+class PermutationObject {
+  /**
+   * @param {Array&lt;number|string>} elements - The underlying set elements.
+   * @param {Object} [options] - Display options.
+   * @param {number} [options.x=width/2] - Center x-position.
+   * @param {number} [options.y=height/2] - Center y-position.
+   * @param {number} [options.spacing=96] - Horizontal spacing between slots.
+   * @param {number} [options.orbitHeight=76] - Height of circular swap arcs.
+   * @param {string} [options.title="Set and ordered tuple"] - Heading drawn above the object.
+   */
+  constructor(elements, options = {}) {
+    this.elements = elements.slice();
+    this.order = elements.slice();
+    this.fromOrder = this.order.slice();
+    this.toOrder = this.order.slice();
+    this.positions = this.positionsForOrder(this.order);
+    this.fromPositions = Object.assign({}, this.positions);
+    this.toPositions = Object.assign({}, this.positions);
+    this.x = options.x || width / 2;
+    this.y = options.y || height / 2;
+    this.spacing = options.spacing || 96;
+    this.orbitHeight = options.orbitHeight || 76;
+    this.title = options.title || "Set and ordered tuple";
+    this.color = permutationColor(options.color || [235, 245, 255]);
+    this.accentColor = permutationColor(options.accentColor || [255, 220, 110]);
+    this.cardColor = permutationColor(options.cardColor || [18, 45, 76]);
+    this.matrixImage = null;
+    this.matrixLatex = "";
+    this.texts = [];
+    this.steps = [];
+    this.animations = [];
+    this.running = false;
+    this.loopSteps = false;
+    this.stepIndex = 0;
+    this.progress = 1;
+    this.path = "flat";
+    this.loadMatrixLatex();
+  }
+
+  /**
+   * Adds either a command or a floating text note.
+   *
+   * Commands:
+   * - `"pause"` pauses on the current permutation.
+   * - `"map", [a, b, c]` animates to a specific order.
+   * - `"swap", 1, 3` swaps two 1-based tuple positions using a circular path.
+   * - `"rotate"` cyclically rotates the tuple.
+   * - `"flip"` reverses the tuple.
+   *
+   * Any other string is treated as text attached to this object.
+   *
+   * @param {string|FloatingTextObject} command - Command name, text, or text object.
+   * @param {...*} args - Command arguments or text options.
+   * @returns {PermutationObject} This object, for chaining.
+   *
+   * @example
+   * p.push("The tuple changes, the set does not.", { x: 0, y: -180 });
+   * p.push("pause");
+   * p.push("map", [2, 3, 1]);
+   * p.push("swap", 1, 2);
+   */
+  push(command, ...args) {
+    if (command instanceof FloatingTextObject) {
+      this.texts.push(command);
+      return this;
+    }
+
+    if (typeof command === "string" &amp;&amp; command !== "rotate" &amp;&amp; command !== "flip" &amp;&amp; command !== "swap" &amp;&amp; command !== "map" &amp;&amp; command !== "pause") {
+      this.texts.push(FloatingText(command, args[0] || {}));
+      return this;
+    }
+
+    this.steps.push({ command, args });
+    return this;
+  }
+
+  /**
+   * Starts queued commands.
+   *
+   * @param {Object} [options] - Run options.
+   * @param {boolean} [options.loop=false] - Restart the queue after the last step.
+   * @returns {PermutationObject} This object.
+   */
+  run(options = {}) {
+    this.running = true;
+    this.loopSteps = Boolean(options.loop);
+    this.stepIndex = 0;
+    this.animations = [];
+    this.startNextStep();
+    return this;
+  }
+
+  /**
+   * Advances animations. Call this once per p5 `draw()` frame.
+   *
+   * @param {number} [dt] - Delta time in seconds. Defaults to p5 `deltaTime`.
+   * @returns {PermutationObject} This object.
+   */
+  update(dt) {
+    const seconds = dt || deltaTime / 1000 || 1 / 60;
+
+    this.animations = this.animations.filter((animation) => {
+      animation.elapsed += seconds;
+      const raw = constrain((animation.elapsed - animation.delay) / animation.duration, 0, 1);
+      this[animation.property] = lerp(animation.from, animation.to, animation.ease(raw));
+      this.path = animation.path || "flat";
+
+      if (raw &lt; 1) return true;
+      this.positions = Object.assign({}, this.toPositions);
+      if (animation.finishOrder) {
+        this.order = animation.finishOrder.slice();
+      }
+      this.loadMatrixLatex();
+      return false;
+    });
+
+    for (let i = 0; i &lt; this.texts.length; i += 1) {
+      this.texts[i].update(seconds);
+    }
+
+    if (this.running &amp;&amp; this.animations.length === 0) this.startNextStep();
+    return this;
+  }
+
+  /**
+   * Draws the set notation, tuple notation, two-line notation, cards, and notes.
+   *
+   * @returns {PermutationObject} This object.
+   */
+  draw() {
+    this.drawHeading();
+    this.drawNotation();
+    this.drawCards();
+
+    for (let i = 0; i &lt; this.texts.length; i += 1) {
+      this.texts[i].draw(this.x, this.y);
+    }
+
+    return this;
+  }
+
+  drawHeading() {
+    fill(this.color.r, this.color.g, this.color.b, 230);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(22);
+    text(this.title, this.x, this.y - 170);
+  }
+
+  drawNotation() {
+    fill(this.color.r, this.color.g, this.color.b, 220);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(22);
+    text(this.setText(), this.x - 180, this.y - 110);
+    text(this.tupleText(), this.x + 180, this.y - 110);
+
+    textSize(18);
+    fill(this.color.r, this.color.g, this.color.b, 175);
+    text("set: membership only", this.x - 180, this.y - 76);
+    text("tuple: order matters", this.x + 180, this.y - 76);
+
+    fill(this.accentColor.r, this.accentColor.g, this.accentColor.b, 230);
+    textSize(20);
+    this.drawMatrixNotation();
+  }
+
+  drawMatrixNotation() {
+    if (this.matrixImage) {
+      imageMode(CENTER);
+      tint(this.accentColor.r, this.accentColor.g, this.accentColor.b, 235);
+      image(this.matrixImage, this.x, this.y + 138);
+      noTint();
+      return;
+    }
+
+    text(this.matrixFallbackText(), this.x, this.y + 130);
+  }
+
+  drawCards() {
+    for (let i = 0; i &lt; this.elements.length; i += 1) {
+      const value = this.elements[i];
+      const fromIndex = this.fromPositions[value];
+      const toIndex = this.toPositions[value];
+      const point = this.movePoint(fromIndex, toIndex);
+
+      fill(this.cardColor.r, this.cardColor.g, this.cardColor.b, 230);
+      stroke(this.accentColor.r, this.accentColor.g, this.accentColor.b, 190);
+      strokeWeight(2);
+      rectMode(CENTER);
+      rect(point.x, point.y, 64, 64, 8);
+
+      fill(this.color.r, this.color.g, this.color.b, 255);
+      noStroke();
+      textAlign(CENTER, CENTER);
+      textSize(26);
+      text(value, point.x, point.y);
+    }
+  }
+
+  movePoint(fromIndex, toIndex) {
+    const x1 = this.slotX(fromIndex);
+    const x2 = this.slotX(toIndex);
+    const x = lerp(x1, x2, this.progress);
+
+    if (this.path === "flat" || fromIndex === toIndex) {
+      return { x, y: this.y };
+    }
+
+    const direction = fromIndex &lt; toIndex ? -1 : 1;
+    const distance = Math.abs(x2 - x1);
+    const height = Math.max(this.orbitHeight, distance * 0.45);
+    const y = this.y + direction * Math.sin(Math.PI * this.progress) * height;
+
+    return { x, y };
+  }
+
+  startNextStep() {
+    if (this.stepIndex >= this.steps.length) {
+      if (this.loopSteps &amp;&amp; this.steps.length > 0) {
+        this.stepIndex = 0;
+      } else {
+        this.running = false;
+        return this;
+      }
+    }
+
+    const step = this.steps[this.stepIndex];
+    this.stepIndex += 1;
+
+    if (step.command === "rotate") this.rotate(step.args[0] || 1, step.args[1] || {});
+    if (step.command === "flip") this.flip(step.args[0] || {});
+    if (step.command === "swap") this.swap(step.args[0], step.args[1], step.args[2] || {});
+    if (step.command === "map") this.map(step.args[0], step.args[1] || {});
+    if (step.command === "pause") this.pause(step.args[0], step.args[1] || {});
+
+    return this;
+  }
+
+  /**
+   * Rotates the tuple left by `amount` positions.
+   *
+   * @param {number} [amount=1] - Number of cyclic shifts.
+   * @param {Object} [options] - Animation options.
+   * @returns {PermutationObject} This object.
+   */
+  rotate(amount = 1, options = {}) {
+    const next = this.order.slice();
+    const steps = modPermutation(amount, next.length);
+    this.animateOrder(next.slice(steps).concat(next.slice(0, steps)), options);
+    return this;
+  }
+
+  /**
+   * Reverses the tuple order.
+   *
+   * For three elements, this moves only the two outer cards, so the default
+   * path becomes circular.
+   *
+   * @param {Object} [options] - Animation options.
+   * @returns {PermutationObject} This object.
+   */
+  flip(options = {}) {
+    this.animateOrder(this.order.slice().reverse(), options);
+    return this;
+  }
+
+  /**
+   * Swaps two 1-based positions using a circular path.
+   *
+   * @param {number} a - First tuple position, starting at 1.
+   * @param {number} b - Second tuple position, starting at 1.
+   * @param {Object} [options] - Animation options.
+   * @returns {PermutationObject} This object.
+   *
+   * @example
+   * p.push("swap", 1, 3); // swaps the outside cards
+   */
+  swap(a, b, options = {}) {
+    const next = this.order.slice();
+    const left = Math.max(0, Math.min(next.length - 1, a - 1));
+    const right = Math.max(0, Math.min(next.length - 1, b - 1));
+    const leftValue = next[left];
+    const rightValue = next[right];
+    next[left] = rightValue;
+    next[right] = leftValue;
+
+    this.animateOrder(next, Object.assign({}, options, { path: options.path || "orbit" }));
+    return this;
+  }
+
+  /**
+   * Animates directly to a chosen tuple order.
+   *
+   * @param {Array&lt;number|string>} nextOrder - The next tuple order.
+   * @param {Object} [options] - Animation options.
+   * @returns {PermutationObject} This object.
+   *
+   * @example
+   * p.push("map", [3, 1, 2]);
+   */
+  map(nextOrder, options = {}) {
+    this.animateOrder(nextOrder.slice(), options);
+    return this;
+  }
+
+  /**
+   * Holds the current state on screen.
+   *
+   * @param {number} [duration=0.9] - Pause duration in seconds.
+   * @param {Object} [options] - Animation options.
+   * @returns {PermutationObject} This object.
+   */
+  pause(duration = 0.9, options = {}) {
+    this.fromPositions = Object.assign({}, this.positions);
+    this.toPositions = Object.assign({}, this.positions);
+    this.progress = 1;
+    this.animations = [{
+      property: "progress",
+      from: 1,
+      to: 1,
+      duration,
+      delay: options.delay || 0,
+      elapsed: 0,
+      ease: permutationEasing(options.ease),
+      path: "flat"
+    }];
+    return this;
+  }
+
+  animateOrder(nextOrder, options = {}) {
+    this.fromOrder = this.order.slice();
+    this.toOrder = nextOrder.slice();
+    this.fromPositions = Object.assign({}, this.positions);
+    this.toPositions = this.positionsForOrder(nextOrder);
+    const path = options.path || (this.movingCount(this.fromPositions, this.toPositions) === 2 ? "orbit" : "flat");
+    this.progress = 0;
+    this.animations = [{
+      property: "progress",
+      from: 0,
+      to: 1,
+      duration: options.duration || 2.6,
+      delay: options.delay || 0,
+      elapsed: 0,
+      ease: permutationEasing(options.ease),
+      finishOrder: nextOrder,
+      path
+    }];
+    return this;
+  }
+
+  setText() {
+    return "{" + this.elements.join(", ") + "}";
+  }
+
+  tupleText() {
+    return "(" + this.order.join(", ") + ")";
+  }
+
+  matrixLatexText() {
+    return "\\begin{pmatrix}" + this.elements.join(" &amp; ") + "\\\\" + this.order.join(" &amp; ") + "\\end{pmatrix}";
+  }
+
+  matrixFallbackText() {
+    return "(" + this.elements.join("  ") + ")\n(" + this.order.join("  ") + ")";
+  }
+
+  loadMatrixLatex() {
+    const latex = this.matrixLatexText();
+    this.matrixLatex = latex;
+
+    latexImage(latex, {
+      size: 30,
+      color: "white",
+      display: false
+    }).then((img) => {
+      if (this.matrixLatex === latex) {
+        this.matrixImage = img;
+      }
+    });
+  }
+
+  slotX(index) {
+    return this.x + (index - (this.elements.length - 1) / 2) * this.spacing;
+  }
+
+  positionsForOrder(order) {
+    const positions = {};
+
+    for (let i = 0; i &lt; order.length; i += 1) {
+      positions[order[i]] = i;
+    }
+
+    return positions;
+  }
+
+  movingCount(fromPositions, toPositions) {
+    let count = 0;
+
+    for (let i = 0; i &lt; this.elements.length; i += 1) {
+      const value = this.elements[i];
+      if (fromPositions[value] !== toPositions[value]) count += 1;
+    }
+
+    return count;
+  }
+}
+
+/**
+ * Creates a permutation animation object.
+ *
+ * @param {Array&lt;number|string>} elements - Elements to display and permute.
+ * @param {Object} [options] - Display options passed to {@link PermutationObject}.
+ * @returns {PermutationObject}
+ */
+function Permutation(elements, options = {}) {
+  return new PermutationObject(elements, options);
+}
+
+function permutationEasing(name) {
+  if (typeof name === "function") return name;
+  if (name === "linear") return (t) => t;
+  return (t) => -(Math.cos(Math.PI * t) - 1) / 2;
+}
+
+function modPermutation(value, base) {
+  return ((value % base) + base) % base;
+}
+
+function permutationColor(value) {
+  if (Array.isArray(value)) {
+    return {
+      r: value[0] === undefined ? 255 : value[0],
+      g: value[1] === undefined ? 255 : value[1],
+      b: value[2] === undefined ? 255 : value[2]
+    };
+  }
+
+  return value;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EquationObject.html">EquationObject</a></li><li><a href="FloatingTextObject.html">FloatingTextObject</a></li><li><a href="PermutationObject.html">PermutationObject</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Equation">Equation</a></li><li><a href="global.html#FloatingText">FloatingText</a></li><li><a href="global.html#Permutation">Permutation</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jul 14 2026 11:02:55 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
