@@ -243,6 +243,7 @@ class DihedralTableObject {
   drawCells() {
     const size = this.tableSize();
 
+    rectMode(CORNER);
     noStroke();
     fill(this.backgroundColor.r, this.backgroundColor.g, this.backgroundColor.b, 230);
     rect(this.x, this.y, this.totalWidth(), this.totalWidth());
@@ -267,6 +268,7 @@ class DihedralTableObject {
     const col = this.indexOfElement(this.highlightTop) + 1;
     const alpha = 150 * this.highlightProgress;
 
+    rectMode(CORNER);
     noStroke();
     fill(this.highlightColor.r, this.highlightColor.g, this.highlightColor.b, alpha * 0.35);
     rect(this.x, this.y + row * this.cellSize, this.totalWidth(), this.cellSize);

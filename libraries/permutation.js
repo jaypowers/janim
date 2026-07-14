@@ -202,6 +202,7 @@ class PermutationObject {
   }
 
   drawCards() {
+    push();
     for (let i = 0; i < this.elements.length; i += 1) {
       const value = this.elements[i];
       const fromIndex = this.fromPositions[value];
@@ -220,6 +221,7 @@ class PermutationObject {
       textSize(26);
       text(value, point.x, point.y);
     }
+    pop();
   }
 
   movePoint(fromIndex, toIndex) {

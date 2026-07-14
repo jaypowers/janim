@@ -24,6 +24,8 @@ The generated documentation is written to `docs/`.
 - `FloatingText(...)` adds simple p5 text labels that can be attached to other
   objects.
 - `Permutation(...)` animates ordered arrangements such as `(1, 2, 3)`.
+- `SymmetricGroup(...)` animates `S_n`, the group of all permutations of
+  `{1, ..., n}`.
 - The two-line permutation notation
   `\begin{pmatrix}1 & 2 & 3\\2 & 3 & 1\end{pmatrix}` means:
   `1 -> 2`, `2 -> 3`, and `3 -> 1`.
